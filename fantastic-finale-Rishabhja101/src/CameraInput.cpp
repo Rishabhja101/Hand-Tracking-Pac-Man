@@ -75,7 +75,7 @@ void CameraInput::CalibrateCamera(int x, int y) {
 }
 
 // Returns the direction that the tracked color indicates
-string CameraInput::GetDirection() {
+Direction CameraInput::GetDirection() {
     for (int i = 0; i < contours.nBlobs; i++) {
         int x = contours.blobs[i].centroid.x - offset_x;
         int y = -contours.blobs[i].centroid.y + offset_y;
@@ -83,22 +83,22 @@ string CameraInput::GetDirection() {
        
 		// up
         if (y > -x && y > x - height) {
-            return "up";
+            return Direction::up;
         }
         // right
         else if (y > -x && y < x - height) {
-            return "right";
+            return Direction::right;
         }
         // down
         else if (y < -x && y < x - height) {
-            return "down";
+            return Direction::down;
         }
         // left
         else {
-            return "left";
+            return Direction::left;
         }
     }
 
 	// hand is not in frame
-	return "";
+	return Direction::none;
 }

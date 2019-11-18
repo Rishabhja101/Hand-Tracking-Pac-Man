@@ -1,3 +1,4 @@
+#include "Direction.h"
 #include "ofCamera.h"
 #include "ofxOpenCv.h"
 
@@ -9,7 +10,7 @@ class CameraInput {
     void Draw();
     void Update();
     void CalibrateCamera(int x, int y);
-    string GetDirection();
+    Direction GetDirection();
 
    private:
     ofVideoGrabber camera;

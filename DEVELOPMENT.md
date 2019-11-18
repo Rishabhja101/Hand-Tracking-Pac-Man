@@ -4,3 +4,6 @@
 
 - **11/16/19** Found an example on https://sites.google.com/site/ofauckland/examples/10-testing for color tracking with OpenCV
   - Used example to create class for camera input with a method that returns up/down/left/right depending on position of hand in the frame
+
+- **11/18/19** Added ability to move the position where the camera frame is displayed on the screen
+  - Added enum for direction instead of using a string
