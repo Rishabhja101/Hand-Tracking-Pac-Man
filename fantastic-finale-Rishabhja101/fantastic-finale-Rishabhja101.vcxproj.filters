@@ -31,6 +31,9 @@
     <ClCompile Include="src\CameraInput.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Map.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -1224,6 +1227,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\CameraInput.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Direction.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Map.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

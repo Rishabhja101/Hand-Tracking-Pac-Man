@@ -7,3 +7,5 @@
 
 - **11/18/19** Added ability to move the position where the camera frame is displayed on the screen
   - Added enum for direction instead of using a string
+
+- **11/21/19** Created Map class which loads a map from a file and displays the maze, coins, and powerups

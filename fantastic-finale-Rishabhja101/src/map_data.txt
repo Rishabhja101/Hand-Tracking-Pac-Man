@@ -1,0 +1,23 @@
+                     
+ xxxxxxxxxxxxxxxxxxx 
+ xooooooooxoooooooox 
+ xOxxoxxxoxoxxxoxxOx 
+ xooooooooooooooooox 
+ xoxxoxoxxxxxoxoxxox 
+ xooooxoooxoooxoooox 
+ xxxxoxxxoxoxxxoxxxx 
+    xox       xox    
+ xxxxox xxxxx xoxxxx 
+T    o  x   x  o    T
+ xxxxox xxxxx xoxxxx 
+    xox       xox    
+ xxxxox xxxxx xoxxxx 
+ xooooooooxoooooooox 
+ xoxxoxxxoxoxxxoxxox 
+ xOoxoooooooooooxoOx 
+ xxoxoxoxxxxxoxoxoxx 
+ xooooxoooxoooxoooox 
+ xoxxxxxxoxoxxxxxxox 
+ xooooooooooooooooox 
+ xxxxxxxxxxxxxxxxxxx 
+                     

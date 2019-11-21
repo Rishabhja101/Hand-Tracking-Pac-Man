@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "CameraInput.h"
+#include "Map.h"
 
 class ofApp : public ofBaseApp {
    public:
@@ -22,4 +23,5 @@ class ofApp : public ofBaseApp {
     void gotMessage(ofMessage msg);
 
     CameraInput input;
+    Map map;
 };
