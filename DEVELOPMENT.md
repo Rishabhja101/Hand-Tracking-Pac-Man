@@ -9,3 +9,4 @@
   - Added enum for direction instead of using a string
 
 - **11/21/19** Created Map class which loads a map from a file and displays the maze, coins, and powerups
+  - Implemented use of constants for items on map

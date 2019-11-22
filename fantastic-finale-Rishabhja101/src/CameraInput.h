@@ -22,12 +22,12 @@ class CameraInput {
     ofxCvGrayscaleImage filtered;
     ofxCvContourFinder contours;
 
-    const int width = 640;
-    const int height = 480;
-    const int tolerance = 5;
-    const int radius = 10;
-    const int offset_x = 100;
-    const int offset_y = 100;
+    const int kWidth = 640;
+    const int kHeight = 480;
+    const int kTolerance = 5;
+    const int kRadius = 10;
+    const int kOffset_x = 100;
+    const int kOffset_y = 100;
 
     int findHue;
 };
