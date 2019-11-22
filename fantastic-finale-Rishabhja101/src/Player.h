@@ -18,6 +18,7 @@ class Player {
 	int position_x;
     int position_y;
     Direction current_direction;
+    Direction next_direction;
     bool possible_directions[4];
     
 	void Collisions(Map map);

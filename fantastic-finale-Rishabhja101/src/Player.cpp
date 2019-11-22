@@ -5,6 +5,7 @@ Player::Player() {
     position_y = kSpawnPositionY;
 
     current_direction = Direction::none;
+    next_direction = Direction::none;
 }
 
 void Player::Draw() {
@@ -13,7 +14,14 @@ void Player::Draw() {
 }
 
 void Player::Update(Map map) {
-    Collisions(map);
+	Collisions(map);
+
+	if (possible_directions[next_direction]) {
+        current_direction = next_direction;
+        next_direction = Direction::none;
+    } else if (current_direction == Direction::none) {
+        next_direction = Direction::none;
+	}
 
     if (current_direction == Direction::up) {
         position_y -= kSpeed;
@@ -44,7 +52,7 @@ void Player::Collisions(Map map) {
     int x_on_map = (position_x - map.kOffsetX) / map.kScale;
     int y_on_map = (position_y - map.kOffsetY) / map.kScale;
 
-	int temp_x = (position_x - map.kOffsetX - map.kScale / 2 - 1) / map.kScale;
+    int temp_x = (position_x - map.kOffsetX - map.kScale / 2 - 1) / map.kScale;
     if (map.GetAtPosition(temp_x, y_on_map) == map.kWall) {
         possible_directions[Direction::left] = false;
         if (current_direction == Direction::left) {
@@ -52,7 +60,7 @@ void Player::Collisions(Map map) {
         }
     }
 
-	temp_x = (position_x - map.kOffsetX + map.kScale / 2) / map.kScale;
+    temp_x = (position_x - map.kOffsetX + map.kScale / 2) / map.kScale;
     if (map.GetAtPosition(temp_x, y_on_map) == map.kWall) {
         possible_directions[Direction::right] = false;
         if (current_direction == Direction::right) {
@@ -60,7 +68,7 @@ void Player::Collisions(Map map) {
         }
     }
 
-	int temp_y = (position_y - map.kOffsetY - map.kScale / 2 - 1) / map.kScale;
+    int temp_y = (position_y - map.kOffsetY - map.kScale / 2 - 1) / map.kScale;
     if (map.GetAtPosition(x_on_map, temp_y) == map.kWall) {
         possible_directions[Direction::up] = false;
         if (current_direction == Direction::up) {
@@ -68,7 +76,7 @@ void Player::Collisions(Map map) {
         }
     }
 
-	temp_y = (position_y - map.kOffsetY + map.kScale / 2) / map.kScale;
+    temp_y = (position_y - map.kOffsetY + map.kScale / 2) / map.kScale;
     if (map.GetAtPosition(x_on_map, temp_y) == map.kWall) {
         possible_directions[Direction::down] = false;
         if (current_direction == Direction::down) {
@@ -76,11 +84,15 @@ void Player::Collisions(Map map) {
         }
     }
 
-	cout << position_x << " " << position_y << " " << possible_directions[Direction::up] << endl;
+    cout << position_x << " " << position_y << " "
+         << possible_directions[Direction::up] << endl;
 }
 
-void Player::ChangeDirection(Direction new_direction) { 
-	if (possible_directions[new_direction]) {
+void Player::ChangeDirection(Direction new_direction) {
+    if (possible_directions[new_direction]) {
         current_direction = new_direction;
+    } 
+	else if (current_direction != new_direction) {
+        next_direction = new_direction;
     }
 }

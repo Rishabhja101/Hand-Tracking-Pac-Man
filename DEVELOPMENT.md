@@ -14,3 +14,4 @@
 - **11/22/19** Created Player class
   - Player is now able to move around the board without traveling through the walls
   - Moved constants in Map to public so they can be accessed by Player
+  - Player can now set their next move for the direction the player will turn once it reaches a wall
