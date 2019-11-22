@@ -191,6 +191,7 @@
     <ClCompile Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\src\ofxCvHaarFinder.cpp" />
     <ClCompile Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\src\ofxCvImage.cpp" />
     <ClCompile Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\src\ofxCvShortImage.cpp" />
+    <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\CameraInput.h" />
@@ -538,6 +539,7 @@
     <ClInclude Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\libs\opencv\include\opencv2\viz.hpp" />
     <ClInclude Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\libs\opencv\include\opencv2\world.hpp" />
     <ClInclude Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxUnitTests\src\ofxUnitTests.h" />
+    <ClInclude Include="src\Player.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
@@ -550,6 +552,9 @@
       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\map_data.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

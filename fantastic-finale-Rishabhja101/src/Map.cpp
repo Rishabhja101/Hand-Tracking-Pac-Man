@@ -39,3 +39,8 @@ void Map::LoadMap(string file_path) {
         map.push_back(line);
 	}
 }
+
+// returns the character in the map at the given position
+char Map::GetAtPosition(int x, int y) { 
+	return map[y][x];
+}

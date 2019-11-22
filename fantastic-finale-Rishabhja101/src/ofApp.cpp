@@ -8,17 +8,27 @@ void ofApp::setup() {
 //--------------------------------------------------------------
 void ofApp::update() { 
 	input.Update(); 
+	player.Update(map);
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() { 
 	input.Draw();
     map.Draw();
+    player.Draw();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    if (key == OF_KEY_RIGHT) {
+        player.ChangeDirection(Direction::right);
+    } else if (key == OF_KEY_LEFT) {
+        player.ChangeDirection(Direction::left);
+    } else if (key == OF_KEY_UP) {
+        player.ChangeDirection(Direction::up);
+    } else if (key == OF_KEY_DOWN) {
+        player.ChangeDirection(Direction::down);
+    }
 }
 
 //--------------------------------------------------------------

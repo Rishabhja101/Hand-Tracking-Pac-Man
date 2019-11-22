@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "CameraInput.h"
-#include "Map.h"
+#include "Player.h"
 
 class ofApp : public ofBaseApp {
    public:
@@ -24,4 +24,5 @@ class ofApp : public ofBaseApp {
 
     CameraInput input;
     Map map;
+    Player player;
 };

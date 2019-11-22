@@ -10,3 +10,7 @@
 
 - **11/21/19** Created Map class which loads a map from a file and displays the maze, coins, and powerups
   - Implemented use of constants for items on map
+
+- **11/22/19** Created Player class
+  - Player is now able to move around the board without traveling through the walls
+  - Moved constants in Map to public so they can be accessed by Player
