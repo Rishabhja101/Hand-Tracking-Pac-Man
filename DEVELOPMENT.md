@@ -15,3 +15,5 @@
   - Player is now able to move around the board without traveling through the walls
   - Moved constants in Map to public so they can be accessed by Player
   - Player can now set their next move for the direction the player will turn once it reaches a wall
+  - Spend a couple hours trying to make it possible for the player to pick up coins from the map with no success
+  - Will come back to coin collecting next week
