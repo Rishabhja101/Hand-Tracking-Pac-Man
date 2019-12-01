@@ -17,3 +17,7 @@
   - Player can now set their next move for the direction the player will turn once it reaches a wall
   - Spend a couple hours trying to make it possible for the player to pick up coins from the map with no success
   - Will come back to coin collecting next week
+
+- **12/01/19** Created Ghost class
+  - Ghost moves around the map randomly
+  - Ghost does not travel through walls, chooses a random direction to move from available directions

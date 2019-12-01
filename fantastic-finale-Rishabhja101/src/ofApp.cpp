@@ -1,5 +1,8 @@
 #include "ofApp.h"
 
+Player ofApp::player;
+Map ofApp::map;
+
 //--------------------------------------------------------------
 void ofApp::setup() { 
 	
@@ -9,6 +12,7 @@ void ofApp::setup() {
 void ofApp::update() { 
 	input.Update(); 
 	player.Update(map);
+    ghost.Update(map);
 }
 
 //--------------------------------------------------------------
@@ -16,6 +20,7 @@ void ofApp::draw() {
 	input.Draw();
     map.Draw();
     player.Draw();
+    ghost.Draw();
 }
 
 //--------------------------------------------------------------

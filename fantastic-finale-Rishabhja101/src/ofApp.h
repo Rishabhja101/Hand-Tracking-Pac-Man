@@ -1,8 +1,7 @@
 #pragma once
 
-#include "ofMain.h"
 #include "CameraInput.h"
-#include "Player.h"
+#include "Ghost.h"
 
 class ofApp : public ofBaseApp {
    public:
@@ -23,6 +22,7 @@ class ofApp : public ofBaseApp {
     void gotMessage(ofMessage msg);
 
     CameraInput input;
-    Map map;
-    Player player;
+    static Map map;
+    static Player player;
+	Ghost ghost;
 };

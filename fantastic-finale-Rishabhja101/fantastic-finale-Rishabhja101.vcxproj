@@ -181,6 +181,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\CameraInput.cpp" />
+    <ClCompile Include="src\Ghost.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Map.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -196,6 +197,7 @@
   <ItemGroup>
     <ClInclude Include="src\CameraInput.h" />
     <ClInclude Include="src\Direction.h" />
+    <ClInclude Include="src\Ghost.h" />
     <ClInclude Include="src\Map.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\src\ofxCvBlob.h" />
