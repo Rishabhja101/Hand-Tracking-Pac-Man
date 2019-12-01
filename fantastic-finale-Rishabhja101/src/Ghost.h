@@ -21,4 +21,5 @@ class Ghost {
 
     void Collisions(Map map);
     void CalculateNextDirection();
+    void Teleport(Map map);
 };

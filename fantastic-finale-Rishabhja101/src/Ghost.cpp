@@ -24,6 +24,8 @@ void Ghost::Update(Map map) {
     } else if (current_direction == Direction::right) {
         position_x += kSpeed;
     }
+
+	Teleport(map);
 }
 
 void Ghost::Collisions(Map map) {
@@ -90,4 +92,23 @@ void Ghost::CalculateNextDirection() {
 		}
 		current_direction = static_cast<Direction>(dir);
 	}
+}
+
+void Ghost::Teleport(Map map) {
+    int x_on_map = (position_x - map.kOffsetX) / map.kScale;
+    int y_on_map = (position_y - map.kOffsetY) / map.kScale;
+    if (map.GetAtPosition(x_on_map, y_on_map) == map.kTeleport) {
+        for (int i = 0; i < map.GetWidth(); i++) {
+            if (map.GetAtPosition(i, y_on_map) == map.kTeleport &&
+                i != x_on_map) {
+                int direction = 1;
+                if (i > map.GetWidth() / 2) {
+                    direction = -1;
+                }
+                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 +
+                             direction * map.kScale / 2;
+                return;
+            }
+        }
+    }
 }

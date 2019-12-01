@@ -22,3 +22,4 @@
   - Ghost moves around the map randomly
   - Ghost does not travel through walls, chooses a random direction to move from available directions
   - Added Player teleportation from one end of the map to the other
+  - Added Ghost teleportation from one end of the map to the other
