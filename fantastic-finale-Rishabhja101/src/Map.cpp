@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map() { 
+Map::Map() {
 	LoadMap(kFilePath); 
 }
 
@@ -35,7 +35,7 @@ void Map::Draw() {
     }
 }
 
-// load a map from the given text file
+// Load a map from the given text file
 void Map::LoadMap(string file_path) {
 	ifstream reader(file_path);
     while (!reader.eof()) {
@@ -43,9 +43,26 @@ void Map::LoadMap(string file_path) {
         getline(reader, line);
         map.push_back(line);
     }
+	
+    height = map.size();
+    if (height > 0) {
+		width = map[0].size();
+    } else {
+        width = 0;
+	}
 }
 
-// returns the character in the map at the given position
+// Returns the character in the map at the given position
 char Map::GetAtPosition(int x, int y) { 
 	return map[y][x]; 
+}
+
+// Returns the width of the map
+int Map::GetWidth() { 
+	return width;
+}
+
+// Returns the height of the map
+int Map::GetHeight() { 
+	return height; 
 }

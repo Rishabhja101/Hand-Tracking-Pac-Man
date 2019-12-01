@@ -16,6 +16,8 @@ class Map {
     Map();
     void Draw();
     char GetAtPosition(int x, int y);
+    int GetWidth();
+    int GetHeight();
 
    private:
     vector<string> map;
@@ -24,6 +26,9 @@ class Map {
     const string kFilePath =
         "C:\\Users\\risha\\OneDrive\\Documents\\GitHub\\fantastic-finale-"
         "Rishabhja101\\fantastic-finale-Rishabhja101\\src\\map_data.txt";
+
+    int width;
+    int height;
 
     void LoadMap(string file_path);
 };

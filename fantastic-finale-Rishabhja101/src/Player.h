@@ -24,4 +24,5 @@ class Player {
     bool possible_directions[4];
     
 	void Collisions(Map map);
+    void Teleport(Map map);
 };
