@@ -27,3 +27,4 @@
  - **12/02/19** Added ability for player to pick up coins
   - Coins get removed from the Map
   - The player's score increases accordingly
+  - Powerups blink

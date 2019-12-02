@@ -5,11 +5,18 @@ Map ofApp::map;
 
 //--------------------------------------------------------------
 void ofApp::setup() { 
-	
+	blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    blink = false;
 }
 
 //--------------------------------------------------------------
 void ofApp::update() { 
+	// flip the bool for blinking if the blink time has elapsed
+	if (blink_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kBlinkSpeed) {
+        blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        blink = !blink;
+	}
+	
 	input.Update(); 
 	player.Update(map);
     ghost.Update(map);
@@ -18,7 +25,7 @@ void ofApp::update() {
 //--------------------------------------------------------------
 void ofApp::draw() { 
 	input.Draw();
-    map.Draw();
+    map.Draw(blink);
     player.Draw();
     ghost.Draw();
 }

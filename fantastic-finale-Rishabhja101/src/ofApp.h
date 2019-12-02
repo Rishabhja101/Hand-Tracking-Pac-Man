@@ -21,8 +21,15 @@ class ofApp : public ofBaseApp {
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
 
-    CameraInput input;
+   private:
+    const int kBlinkSpeed = 1;
+	   
+	time_t blink_timer;
+    bool blink;
     static Map map;
     static Player player;
+	CameraInput input;
 	Ghost ghost;
+
+	
 };

@@ -7,7 +7,7 @@ Map::Map() {
 }
 
 // Display the map along with all of its coins and powerups
-void Map::Draw() {
+void Map::Draw(bool blink) {
     ofSetColor(0, 0, 255);
 
     for (int i = 0; i < map.size(); i++) {
@@ -20,7 +20,7 @@ void Map::Draw() {
                 ofSetColor(0, 0, 255);
                 ofDrawRectangle(n * kScale + kOffsetX, i * kScale + kOffsetY,
                                 kScale, kScale);
-            } else if (map[i][n] == kPowerup) {
+            } else if (map[i][n] == kPowerup && !blink) {
                 ofSetColor(255, 255, 255);
                 ofDrawCircle(n * kScale + kOffsetX + kScale / 2,
                              i * kScale + kOffsetY + kScale / 2,

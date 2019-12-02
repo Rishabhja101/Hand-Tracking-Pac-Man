@@ -15,7 +15,7 @@ class Map {
     const char kEmpty = ' ';
 
     Map();
-    void Draw();
+    void Draw(bool blink);
     char GetAtPosition(int x, int y);
     int GetWidth();
     int GetHeight();
