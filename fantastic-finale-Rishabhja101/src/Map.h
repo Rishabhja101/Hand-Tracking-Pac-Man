@@ -12,15 +12,17 @@ class Map {
     const char kPowerup = 'O';
     const char kCoin = 'o';
     const char kTeleport = 'T';
+    const char kEmpty = ' ';
 
     Map();
     void Draw();
     char GetAtPosition(int x, int y);
     int GetWidth();
     int GetHeight();
+    bool CollectCoin(int x, int y);
 
    private:
-    vector<string> map;
+    static vector<string> map;
     const int kPowerupRadius = 10;
     const int kCoinRadius = 5;
     const string kFilePath =

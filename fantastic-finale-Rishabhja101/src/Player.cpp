@@ -1,6 +1,8 @@
 #include "Player.h"
 
 Player::Player() {
+    score = 0;
+
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
@@ -91,6 +93,12 @@ void Player::Collisions(Map map) {
             current_direction = Direction::none;
         }
     }
+
+	// collect coin
+    if (map.CollectCoin(x_on_map, y_on_map)){
+        score += kCoinValue;
+        cout << score << endl;
+	}
 }
 
 void Player::ChangeDirection(Direction new_direction) {

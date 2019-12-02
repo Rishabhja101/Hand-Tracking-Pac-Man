@@ -23,3 +23,7 @@
   - Ghost does not travel through walls, chooses a random direction to move from available directions
   - Added Player teleportation from one end of the map to the other
   - Added Ghost teleportation from one end of the map to the other
+
+ - **12/02/19** Added ability for player to pick up coins
+  - Coins get removed from the Map
+  - The player's score increases accordingly

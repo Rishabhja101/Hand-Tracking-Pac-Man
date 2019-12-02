@@ -16,7 +16,9 @@ class Player {
     const int kRadius = 20;
     const int kSpawnPositionX = 380;
     const int kSpawnPositionY = 380;
+    const int kCoinValue = 10;
 
+	int score;
 	int position_x;
     int position_y;
     Direction current_direction;
