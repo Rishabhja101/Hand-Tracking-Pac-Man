@@ -73,3 +73,13 @@ bool Map::CollectCoin(int x, int y) {
     }
     return false;
 }
+
+// If there is a powerup on the given coordinate, remove the powerup and return true,
+// otherwise return false
+bool Map::GetPowerup(int x, int y) {
+    if (map[y][x] == kPowerup) {
+        map[y][x] = kEmpty;
+        return true;
+    }
+    return false;
+}

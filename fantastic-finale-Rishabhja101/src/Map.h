@@ -1,5 +1,6 @@
 #pragma once
 
+#include "State.h"
 #include "fstream"
 #include "ofMain.h"
 
@@ -13,13 +14,14 @@ class Map {
     const char kCoin = 'o';
     const char kTeleport = 'T';
     const char kEmpty = ' ';
-
+	
     Map();
     void Draw(bool blink);
     char GetAtPosition(int x, int y);
     int GetWidth();
     int GetHeight();
     bool CollectCoin(int x, int y);
+    bool GetPowerup(int x, int y);
 
    private:
     static vector<string> map;

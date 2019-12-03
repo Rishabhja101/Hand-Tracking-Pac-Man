@@ -23,13 +23,14 @@ class ofApp : public ofBaseApp {
 
    private:
     const int kBlinkSpeed = 1;
-	   
-	time_t blink_timer;
+    const int kScaredTime = 10;
+
+	time_t scared_timer;
+    time_t blink_timer;
     bool blink;
     static Map map;
     static Player player;
-	CameraInput input;
-	Ghost ghost;
-
-	
+    CameraInput input;
+    Ghost ghost;
+    State game_state;
 };

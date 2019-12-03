@@ -2,6 +2,7 @@
 
 Player::Player() {
     score = 0;
+    powerup = false;
 
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
@@ -38,6 +39,7 @@ void Player::Update(Map map) {
 	Teleport(map);
 }
 
+// Returns true if the player hit a powerup otherwise returns false
 void Player::Collisions(Map map) {
     possible_directions[Direction::up] = true;
     possible_directions[Direction::down] = true;
@@ -99,6 +101,11 @@ void Player::Collisions(Map map) {
         score += kCoinValue;
         cout << score << endl;
 	}
+
+	// get powerup
+    if (map.GetPowerup(x_on_map, y_on_map)) {
+        powerup = true;
+    }
 }
 
 void Player::ChangeDirection(Direction new_direction) {
@@ -124,4 +131,10 @@ void Player::Teleport(Map map) {
 			}
 		}
 	}
+}
+
+bool Player::HasPowerup() { 
+	bool temp = powerup;
+	powerup = false;
+	return temp;
 }

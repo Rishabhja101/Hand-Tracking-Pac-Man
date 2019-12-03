@@ -5,7 +5,7 @@
 class Ghost {
    public:
     Ghost();
-    void Draw();
+    void Draw(State game_state);
     void Update(Map map);
 
    private:

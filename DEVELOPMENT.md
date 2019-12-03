@@ -28,3 +28,8 @@
   - Coins get removed from the Map
   - The player's score increases accordingly
   - Powerups blink
+
+ - **12/03/19** Player can pickup Powerups
+  - Ghosts enter a scared state when player has a powerup
+  - Powerup's effects only last a specified amount of time
+  - Ghost's color changes during scared mode

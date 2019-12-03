@@ -10,6 +10,7 @@ class Player {
     void Draw();
     void Update(Map map);
     void ChangeDirection(Direction new_direction);
+    bool HasPowerup();
 
    private:
     const int kSpeed = 10;
@@ -24,6 +25,7 @@ class Player {
     Direction current_direction;
     Direction next_direction;
     bool possible_directions[4];
+    bool powerup;
     
 	void Collisions(Map map);
     void Teleport(Map map);

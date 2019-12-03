@@ -6,9 +6,13 @@ Ghost::Ghost() {
     current_direction = Direction::none;
 }
 
-void Ghost::Draw() {
-    ofSetColor(0, 255, 0); 
-    ofDrawCircle(position_x, position_y, kRadius);
+void Ghost::Draw(State game_state) {
+    if (game_state == State::regular) {
+		ofSetColor(0, 255, 0); 
+    } else if (game_state == State::scared) {
+        ofSetColor(0, 0, 255); 
+	}
+	ofDrawCircle(position_x, position_y, kRadius);
 }
 
 void Ghost::Update(Map map) { 

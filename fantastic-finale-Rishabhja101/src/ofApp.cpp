@@ -7,27 +7,38 @@ Map ofApp::map;
 void ofApp::setup() { 
 	blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     blink = false;
+    game_state = State::regular;
 }
 
 //--------------------------------------------------------------
-void ofApp::update() { 
+void ofApp::update() {
 	// flip the bool for blinking if the blink time has elapsed
 	if (blink_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kBlinkSpeed) {
         blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
         blink = !blink;
 	}
+    
+	// check if it is time to unscare
+	if (game_state == State::scared && scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kScaredTime) {
+		game_state = State::regular;
+	}
 	
-	input.Update(); 
+	input.Update();
 	player.Update(map);
     ghost.Update(map);
+
+	if (player.HasPowerup()){
+        game_state = State::scared;
+        scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
+	}
 }
 
 //--------------------------------------------------------------
-void ofApp::draw() { 
+void ofApp::draw() {
 	input.Draw();
     map.Draw(blink);
+    ghost.Draw(game_state);
     player.Draw();
-    ghost.Draw();
 }
 
 //--------------------------------------------------------------

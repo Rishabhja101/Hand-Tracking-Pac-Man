@@ -542,6 +542,7 @@
     <ClInclude Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\libs\opencv\include\opencv2\world.hpp" />
     <ClInclude Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxUnitTests\src\ofxUnitTests.h" />
     <ClInclude Include="src\Player.h" />
+    <ClInclude Include="src\State.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
