@@ -20,9 +20,15 @@ void ofApp::update() {
     
 	// check if it is time to unscare
 	if (game_state == State::scared && scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kScaredTime) {
-		game_state = State::regular;
+		game_state = State::unscaring;
+		scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        cout << "1" << endl;
 	}
+    else if (game_state == State::unscaring && scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kUnscaringTime) {
+        game_state = State::regular;
+    }
 	
+
 	input.Update();
 	player.Update(map);
     ghost.Update(map);
@@ -37,7 +43,7 @@ void ofApp::update() {
 void ofApp::draw() {
 	input.Draw();
     map.Draw(blink);
-    ghost.Draw(game_state);
+    ghost.Draw(game_state, blink);
     player.Draw();
 }
 

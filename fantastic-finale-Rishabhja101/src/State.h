@@ -2,5 +2,6 @@
 
 enum State { 
 	regular, 
-	scared
+	scared,
+	unscaring
 };

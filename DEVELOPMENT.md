@@ -33,3 +33,4 @@
   - Ghosts enter a scared state when player has a powerup
   - Powerup's effects only last a specified amount of time
   - Ghost's color changes during scared mode
+  - Ghost's color starts blinking when scared mode is about to end 

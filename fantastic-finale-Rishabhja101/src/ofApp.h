@@ -24,6 +24,7 @@ class ofApp : public ofBaseApp {
    private:
     const int kBlinkSpeed = 1;
     const int kScaredTime = 10;
+    const int kUnscaringTime = 10;
 
 	time_t scared_timer;
     time_t blink_timer;

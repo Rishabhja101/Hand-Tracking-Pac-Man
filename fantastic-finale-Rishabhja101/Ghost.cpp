@@ -1,4 +1,4 @@
-#include "Ghost.h"
+#include "src/Ghost.h"
 
 Ghost::Ghost() {
     position_x = kSpawnPositionX;
@@ -13,8 +13,9 @@ void Ghost::Draw(State game_state, bool blink) {
                (game_state == State::unscaring && blink)) {
         ofSetColor(0, 0, 255);
     } else if (game_state == State::unscaring) {
-        (255, 255, 255);
+        ofSetColor(255, 255, 255);
     }
+
     ofDrawCircle(position_x, position_y, kRadius);
 }
 

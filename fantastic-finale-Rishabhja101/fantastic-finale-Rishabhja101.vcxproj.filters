@@ -37,6 +37,7 @@
     <ClCompile Include="src\Player.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="src\Ghost.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -1244,10 +1245,11 @@
     <ClInclude Include="src\Player.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\Ghost.h">
+    <ClInclude Include="src\State.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\State.h">
+    <ClInclude Include="Ghost.h" />
+    <ClInclude Include="src\Ghost.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

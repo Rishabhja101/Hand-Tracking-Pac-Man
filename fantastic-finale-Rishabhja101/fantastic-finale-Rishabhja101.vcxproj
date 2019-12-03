@@ -180,6 +180,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="src\CameraInput.cpp" />
     <ClCompile Include="src\Ghost.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="src\CameraInput.h" />
     <ClInclude Include="src\Direction.h" />
     <ClInclude Include="src\Ghost.h" />
