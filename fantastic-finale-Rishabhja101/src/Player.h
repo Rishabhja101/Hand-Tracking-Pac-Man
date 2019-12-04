@@ -14,6 +14,7 @@ class Player {
     void Kill();
     int GetPositionX();
     int GetPositionY();
+    void LoadMusic(ofSoundPlayer death_music, ofSoundPlayer eat_music);
 
    private:
     const int kSpeed = 10;
@@ -22,7 +23,7 @@ class Player {
     const int kSpawnPositionY = 1040;
     const int kCoinValue = 10;
     const int kStartingLives = 3;
-
+   
     int score;
     int lives;
     int position_x;
@@ -31,6 +32,8 @@ class Player {
     Direction next_direction;
     bool possible_directions[4];
     bool powerup;
+    ofSoundPlayer death_music;
+    ofSoundPlayer eat_music;
 
     void Collisions(Map map);
     void Teleport(Map map);

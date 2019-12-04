@@ -38,3 +38,6 @@
   - Player now respawns upon colliding with the ghost
   - Player now loses lives when it dies
   - Player and Ghost respawn at their correct positions and Ghost can escape the ghost cage
+
+ - **12/04/19** Added sounds for start game, collecting coin, dying, and eating ghosts
+ 

@@ -25,6 +25,9 @@ class ofApp : public ofBaseApp {
     const int kBlinkSpeed = 1;
     const int kScaredTime = 10;
     const int kUnscaringTime = 10;
+    const string kGameMusicPath = "pacman_beginning.wav";
+    const string kDeathMusicPath = "pacman_death.wav";
+    const string kEatMusicPath = "pacman_chomp.wav";
 
 	time_t scared_timer;
     time_t blink_timer;
@@ -34,4 +37,5 @@ class ofApp : public ofBaseApp {
     CameraInput input;
     Ghost ghost;
     State game_state;
+    ofSoundPlayer game_music;
 };

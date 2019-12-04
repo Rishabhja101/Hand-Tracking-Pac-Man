@@ -15,12 +15,14 @@ class Ghost {
     const int kRadius = 20;
     const int kSpawnPositionX = 680;
     const int kSpawnPositionY = 680;
+    const string kMusicPath = "pacman_eatghost.wav";
 
     int position_x;
     int position_y;
     Direction current_direction;
     bool possible_directions[4];
     bool escape;
+    ofSoundPlayer death_music;
 
     void Collisions(Map map);
     void CalculateNextDirection(Map map);

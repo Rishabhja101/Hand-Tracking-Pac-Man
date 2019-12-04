@@ -3,6 +3,7 @@
 Ghost::Ghost() {
     ResetPosition();
     current_direction = Direction::none;
+    death_music.load(kMusicPath);
     escape = true;
 }
 
@@ -144,22 +145,26 @@ void Ghost::Teleport(Map map) {
     }
 }
 
-void Ghost::Kill() { ResetPosition(); }
+void Ghost::Kill() { 
+	death_music.play();
+	ResetPosition(); 
+}
 
 void Ghost::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
+
+    escape = true;
 }
 
 // Returns true if the player died, if the player ate the ghost, kills the ghost
 // and returns false, otherwise just returns false
 bool Ghost::PlayerCollision(int position_x, int position_y, State game_state,
                             Map map) {
-    if ((position_x - map.kOffsetX) / map.kScale ==
+    if ((this->position_x - map.kOffsetX) / map.kScale ==
             (position_x - map.kOffsetX) / map.kScale &&
-        (position_y - map.kOffsetY) / map.kScale ==
+        (this->position_y - map.kOffsetY) / map.kScale ==
             (position_y - map.kOffsetY) / map.kScale) {
-        return false;
         if (game_state == State::regular) {
             return true;
         } else if (game_state == State::unscaring ||

@@ -8,6 +8,14 @@ void ofApp::setup() {
 	blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     blink = false;
     game_state = State::regular;
+    game_music.load(kGameMusicPath);
+    game_music.play();
+
+	ofSoundPlayer death_music;
+    ofSoundPlayer eat_music;
+    eat_music.load(kEatMusicPath);
+    death_music.load(kDeathMusicPath);
+    player.LoadMusic(death_music, eat_music);
 }
 
 //--------------------------------------------------------------

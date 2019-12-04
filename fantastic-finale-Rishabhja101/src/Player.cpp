@@ -4,7 +4,7 @@ Player::Player() {
     score = 0;
     powerup = false;
     lives = kStartingLives;
-
+    
     ResetPosition();
 }
 
@@ -96,6 +96,7 @@ void Player::Collisions(Map map) {
     // collect coin
     if (map.CollectCoin(x_on_map, y_on_map)) {
         score += kCoinValue;
+        eat_music.play();
         cout << score << endl;
     }
 
@@ -141,6 +142,7 @@ bool Player::HasPowerup() {
 void Player::Kill() {
     ResetPosition();
     lives--;
+    death_music.play();
     cout << "lives " << lives << endl;
 }
 
@@ -158,4 +160,9 @@ int Player::GetPositionX() {
 
 int Player::GetPositionY() {
 	return position_y;
+}
+
+void Player::LoadMusic(ofSoundPlayer death_music, ofSoundPlayer eat_music) {
+    this->death_music = death_music;
+    this->eat_music = eat_music;
 }
