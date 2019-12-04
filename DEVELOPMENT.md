@@ -42,3 +42,4 @@
  - **12/04/19** Added sounds for start game, collecting coin, dying, and eating ghosts
   - Added delays to game to match music
   - Added respawn time for ghost
+  - Player's mouth opens and closes

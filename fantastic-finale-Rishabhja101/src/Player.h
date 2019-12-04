@@ -23,13 +23,18 @@ class Player {
     const int kSpawnPositionY = 1040;
     const int kCoinValue = 10;
     const int kStartingLives = 3;
+    const double kMaxMouthDegree = 0.8;
+    const double kMouthSpeed = 0.1;
    
     int score;
     int lives;
     int position_x;
     int position_y;
+    double mouth_angle;
+    double mouth_direction;
     Direction current_direction;
     Direction next_direction;
+    Direction last_direction;
     bool possible_directions[4];
     bool powerup;
     ofSoundPlayer eat_music;

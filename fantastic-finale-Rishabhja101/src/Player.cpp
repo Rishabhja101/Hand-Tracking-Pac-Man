@@ -11,6 +11,65 @@ Player::Player() {
 void Player::Draw() {
     ofSetColor(255, 255, 0);
     ofDrawCircle(position_x, position_y, kRadius);
+
+	ofSetColor(0, 0, 0);
+
+	if (current_direction != Direction::none) {
+        last_direction = current_direction;
+	}
+
+	double radius = kRadius * 1.1;
+
+	if (last_direction == Direction::down) {
+                    ofDrawTriangle(position_x, position_y,
+                                   position_x + radius * sin(mouth_angle),
+                                   position_y + radius * cos(mouth_angle),
+                                   position_x - radius * sin(mouth_angle),
+                                   position_y + radius * cos(mouth_angle));
+            ofDrawTriangle(position_x,
+                           position_y + 2 * radius * cos(mouth_angle),
+                           position_x + radius * sin(mouth_angle),
+                           position_y + radius * cos(mouth_angle),
+                           position_x - radius * sin(mouth_angle),
+                           position_y + radius * cos(mouth_angle));
+	} 
+	else if (last_direction == Direction::up) {
+            ofDrawTriangle(position_x, position_y,
+                           position_x + radius * sin(mouth_angle),
+                           position_y - radius * cos(mouth_angle),
+                           position_x - radius * sin(mouth_angle),
+                           position_y - radius * cos(mouth_angle));
+            ofDrawTriangle(position_x,
+                           position_y - 2 * radius * cos(mouth_angle),
+                           position_x + radius * sin(mouth_angle),
+                           position_y - radius * cos(mouth_angle),
+                           position_x - radius * sin(mouth_angle),
+                           position_y - radius * cos(mouth_angle));
+	} 
+	else if (last_direction == Direction::left) {
+            ofDrawTriangle(position_x - 2 * radius * cos(mouth_angle), position_y,
+                           position_x - radius * cos(mouth_angle),
+                           position_y + radius * sin(mouth_angle),
+                           position_x - radius * cos(mouth_angle),
+                           position_y - radius * sin(mouth_angle));
+            ofDrawTriangle(position_x, position_y,
+                           position_x - radius * cos(mouth_angle),
+                           position_y + radius * sin(mouth_angle),
+                           position_x - radius * cos(mouth_angle),
+                           position_y - radius * sin(mouth_angle));
+	} 
+	else if (last_direction == Direction::right) {
+            ofDrawTriangle(position_x + 2 * radius * cos(mouth_angle), position_y,
+                           position_x + radius * cos(mouth_angle),
+                           position_y + radius * sin(mouth_angle),
+                           position_x + radius * cos(mouth_angle),
+                           position_y - radius * sin(mouth_angle));
+            ofDrawTriangle(position_x, position_y,
+                           position_x + radius * cos(mouth_angle),
+                           position_y + radius * sin(mouth_angle),
+                           position_x + radius * cos(mouth_angle),
+                           position_y - radius * sin(mouth_angle));
+	}
 }
 
 void Player::Update(Map map, State game_state) {
@@ -38,6 +97,14 @@ void Player::Update(Map map, State game_state) {
     }
 
     Teleport(map);
+
+	if (current_direction != Direction::none) {
+		mouth_angle += mouth_direction;
+	}
+
+	if (mouth_angle <= 0 || mouth_angle >= kMaxMouthDegree) {
+        mouth_direction *= -1;
+	}
 }
 
 // Returns true if the player hit a powerup otherwise returns false
@@ -66,6 +133,7 @@ void Player::Collisions(Map map) {
     if (map.GetAtPosition(temp_x, y_on_map) == map.kWall) {
         possible_directions[Direction::left] = false;
         if (current_direction == Direction::left) {
+            last_direction = current_direction;
             current_direction = Direction::none;
         }
     }
@@ -75,6 +143,7 @@ void Player::Collisions(Map map) {
     if (map.GetAtPosition(temp_x, y_on_map) == map.kWall) {
         possible_directions[Direction::right] = false;
         if (current_direction == Direction::right) {
+            last_direction = current_direction;
             current_direction = Direction::none;
         }
     }
@@ -84,6 +153,7 @@ void Player::Collisions(Map map) {
     if (map.GetAtPosition(x_on_map, temp_y) == map.kWall) {
         possible_directions[Direction::up] = false;
         if (current_direction == Direction::up) {
+            last_direction = current_direction;
             current_direction = Direction::none;
         }
     }
@@ -93,6 +163,7 @@ void Player::Collisions(Map map) {
     if (map.GetAtPosition(x_on_map, temp_y) == map.kWall) {
         possible_directions[Direction::down] = false;
         if (current_direction == Direction::down) {
+            last_direction = current_direction;
             current_direction = Direction::none;
         }
     }
@@ -153,8 +224,11 @@ void Player::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
+	mouth_angle = kMaxMouthDegree;
+    mouth_direction = -kMouthSpeed;
     current_direction = Direction::none;
     next_direction = Direction::none;
+    last_direction = Direction::right;
 }
 
 int Player::GetPositionX() { 
