@@ -77,8 +77,8 @@ void CameraInput::CalibrateCamera(int x, int y) {
 // Returns the direction that the tracked color indicates
 Direction CameraInput::GetDirection() {
     for (int i = 0; i < contours.nBlobs; i++) {
-        int x = contours.blobs[i].centroid.x - kOffset_x;
-        int y = -contours.blobs[i].centroid.y + kOffset_y;
+        int x = contours.blobs[i].centroid.x;
+        int y = -contours.blobs[i].centroid.y;
         int height = camera.getHeight();
        
 		// up

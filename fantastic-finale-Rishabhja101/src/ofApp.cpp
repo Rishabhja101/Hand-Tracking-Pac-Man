@@ -5,6 +5,8 @@ Map ofApp::map;
 
 //--------------------------------------------------------------
 void ofApp::setup() { 
+	ofBackground(0, 0, 0);
+
 	blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     blink = false;
     game_state = State::starting;
@@ -31,6 +33,10 @@ void ofApp::update() {
         player.Kill();
 		sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	}
+
+	// get the new direction for the player
+    player.ChangeDirection(input.GetDirection());
+    cout << input.GetDirection() << endl;
 
 	// flip the bool for blinking if the blink time has elapsed
 	if (blink_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kBlinkSpeed) {

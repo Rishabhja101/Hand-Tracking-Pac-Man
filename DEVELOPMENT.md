@@ -24,12 +24,12 @@
   - Added Player teleportation from one end of the map to the other
   - Added Ghost teleportation from one end of the map to the other
 
- - **12/02/19** Added ability for player to pick up coins
+- **12/02/19** Added ability for player to pick up coins
   - Coins get removed from the Map
   - The player's score increases accordingly
   - Powerups blink
 
- - **12/03/19** Player can pickup Powerups
+- **12/03/19** Player can pickup Powerups
   - Ghosts enter a scared state when player has a powerup
   - Powerup's effects only last a specified amount of time
   - Ghost's color changes during scared mode
@@ -39,7 +39,8 @@
   - Player now loses lives when it dies
   - Player and Ghost respawn at their correct positions and Ghost can escape the ghost cage
 
- - **12/04/19** Added sounds for start game, collecting coin, dying, and eating ghosts
+- **12/04/19** Added sounds for start game, collecting coin, dying, and eating ghosts
   - Added delays to game to match music
   - Added respawn time for ghost
   - Player's mouth opens and closes
+  - Player can now be controlled through the camera
