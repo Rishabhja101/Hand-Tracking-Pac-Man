@@ -1,8 +1,7 @@
 #include "Ghost.h"
 
 Ghost::Ghost() {
-    position_x = kSpawnPositionX;
-    position_y = kSpawnPositionY;
+    ResetPosition();
     current_direction = Direction::none;
 }
 
@@ -13,8 +12,9 @@ void Ghost::Draw(State game_state, bool blink) {
                (game_state == State::unscaring && blink)) {
         ofSetColor(0, 0, 255);
     } else if (game_state == State::unscaring) {
-        (255, 255, 255);
+        ofSetColor(255, 255, 255);
     }
+
     ofDrawCircle(position_x, position_y, kRadius);
 }
 
@@ -132,4 +132,31 @@ void Ghost::Teleport(Map map) {
             }
         }
     }
+}
+
+void Ghost::Kill() { ResetPosition(); }
+
+void Ghost::ResetPosition() {
+    position_x = kSpawnPositionX;
+    position_y = kSpawnPositionY;
+}
+
+// Returns true if the player died, if the player ate the ghost, kills the ghost
+// and returns false, otherwise just returns false
+bool Ghost::PlayerCollision(int position_x, int position_y, State game_state,
+                            Map map) {
+    if ((position_x - map.kOffsetX) / map.kScale ==
+            (position_x - map.kOffsetX) / map.kScale &&
+        (position_y - map.kOffsetY) / map.kScale ==
+            (position_y - map.kOffsetY) / map.kScale) {
+        return false;
+        if (game_state == State::regular) {
+            return true;
+        } else if (game_state == State::unscaring ||
+                   game_state == State::scared) {
+            Kill();
+            return false;
+        }
+    }
+    return false;
 }

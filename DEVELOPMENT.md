@@ -33,4 +33,7 @@
   - Ghosts enter a scared state when player has a powerup
   - Powerup's effects only last a specified amount of time
   - Ghost's color changes during scared mode
-  - Ghost's color starts blinking when scared mode is about to end 
+  - Ghost's color starts blinking when scared mode is about to end
+  - Ghosts now respawn when eaten by the player
+  - Player now respawns upon colliding with the ghost
+  - Player now loses lives when it dies

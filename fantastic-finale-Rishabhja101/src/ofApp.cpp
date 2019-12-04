@@ -37,6 +37,11 @@ void ofApp::update() {
         game_state = State::scared;
         scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	}
+
+	if (ghost.PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
+        player.Kill();
+        ghost.ResetPosition();
+	}
 }
 
 //--------------------------------------------------------------

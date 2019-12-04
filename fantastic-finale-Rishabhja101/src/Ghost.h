@@ -7,6 +7,8 @@ class Ghost {
     Ghost();
     void Draw(State game_state, bool blink);
     void Update(Map map);
+    bool PlayerCollision(int position_x, int position_y, State game_state, Map map);
+    void ResetPosition();
 
    private:
     const int kSpeed = 5;
@@ -22,4 +24,5 @@ class Ghost {
     void Collisions(Map map);
     void CalculateNextDirection();
     void Teleport(Map map);
+    void Kill();
 };

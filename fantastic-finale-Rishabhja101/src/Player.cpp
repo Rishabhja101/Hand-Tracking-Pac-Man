@@ -3,12 +3,9 @@
 Player::Player() {
     score = 0;
     powerup = false;
+    lives = kStartingLives;
 
-    position_x = kSpawnPositionX;
-    position_y = kSpawnPositionY;
-
-    current_direction = Direction::none;
-    next_direction = Direction::none;
+    ResetPosition();
 }
 
 void Player::Draw() {
@@ -36,7 +33,7 @@ void Player::Update(Map map) {
         position_x += kSpeed;
     }
 
-	Teleport(map);
+    Teleport(map);
 }
 
 // Returns true if the player hit a powerup otherwise returns false
@@ -96,13 +93,13 @@ void Player::Collisions(Map map) {
         }
     }
 
-	// collect coin
-    if (map.CollectCoin(x_on_map, y_on_map)){
+    // collect coin
+    if (map.CollectCoin(x_on_map, y_on_map)) {
         score += kCoinValue;
         cout << score << endl;
-	}
+    }
 
-	// get powerup
+    // get powerup
     if (map.GetPowerup(x_on_map, y_on_map)) {
         powerup = true;
     }
@@ -121,20 +118,44 @@ void Player::Teleport(Map map) {
     int y_on_map = (position_y - map.kOffsetY) / map.kScale;
     if (map.GetAtPosition(x_on_map, y_on_map) == map.kTeleport) {
         for (int i = 0; i < map.GetWidth(); i++) {
-            if (map.GetAtPosition(i, y_on_map) == map.kTeleport && i != x_on_map) {
+            if (map.GetAtPosition(i, y_on_map) == map.kTeleport &&
+                i != x_on_map) {
                 int direction = 1;
                 if (i > map.GetWidth() / 2) {
                     direction = -1;
-				}
-                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 + direction * map.kScale / 2;
+                }
+                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 +
+                             direction * map.kScale / 2;
                 return;
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
-bool Player::HasPowerup() { 
-	bool temp = powerup;
-	powerup = false;
-	return temp;
+bool Player::HasPowerup() {
+    bool temp = powerup;
+    powerup = false;
+    return temp;
+}
+
+void Player::Kill() {
+    ResetPosition();
+    lives--;
+    cout << "lives " << lives << endl;
+}
+
+void Player::ResetPosition() {
+    position_x = kSpawnPositionX;
+    position_y = kSpawnPositionY;
+
+    current_direction = Direction::none;
+    next_direction = Direction::none;
+}
+
+int Player::GetPositionX() { 
+	return position_x; 
+}
+
+int Player::GetPositionY() {
+	return position_y;
 }
