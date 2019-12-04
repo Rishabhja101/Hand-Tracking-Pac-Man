@@ -22,7 +22,6 @@ void ofApp::update() {
 	if (game_state == State::scared && scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kScaredTime) {
 		game_state = State::unscaring;
 		scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
-        cout << "1" << endl;
 	}
     else if (game_state == State::unscaring && scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kUnscaringTime) {
         game_state = State::regular;

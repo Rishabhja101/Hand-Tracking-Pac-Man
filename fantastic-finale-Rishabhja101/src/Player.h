@@ -18,8 +18,8 @@ class Player {
    private:
     const int kSpeed = 10;
     const int kRadius = 20;
-    const int kSpawnPositionX = 380;
-    const int kSpawnPositionY = 380;
+    const int kSpawnPositionX = 680;
+    const int kSpawnPositionY = 1040;
     const int kCoinValue = 10;
     const int kStartingLives = 3;
 

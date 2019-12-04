@@ -13,16 +13,17 @@ class Ghost {
    private:
     const int kSpeed = 5;
     const int kRadius = 20;
-    const int kSpawnPositionX = 380;
-    const int kSpawnPositionY = 200;
+    const int kSpawnPositionX = 680;
+    const int kSpawnPositionY = 680;
 
     int position_x;
     int position_y;
     Direction current_direction;
     bool possible_directions[4];
+    bool escape;
 
     void Collisions(Map map);
-    void CalculateNextDirection();
+    void CalculateNextDirection(Map map);
     void Teleport(Map map);
     void Kill();
 };

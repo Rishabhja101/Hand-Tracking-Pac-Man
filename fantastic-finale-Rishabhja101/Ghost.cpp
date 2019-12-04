@@ -3,6 +3,7 @@
 Ghost::Ghost() {
     ResetPosition();
     current_direction = Direction::none;
+    escape = true;
 }
 
 void Ghost::Draw(State game_state, bool blink) {
@@ -20,7 +21,7 @@ void Ghost::Draw(State game_state, bool blink) {
 
 void Ghost::Update(Map map) {
     Collisions(map);
-    CalculateNextDirection();
+    CalculateNextDirection(map);
 
     if (current_direction == Direction::up) {
         position_y -= kSpeed;
@@ -92,7 +93,7 @@ void Ghost::Collisions(Map map) {
     }
 }
 
-void Ghost::CalculateNextDirection() {
+void Ghost::CalculateNextDirection(Map map) {
     if (current_direction == Direction::none ||
         ((current_direction == Direction::right ||
           current_direction == Direction::left) &&
@@ -113,6 +114,15 @@ void Ghost::CalculateNextDirection() {
         }
         current_direction = static_cast<Direction>(dir);
     }
+
+	if (escape) {
+        if (position_x == kSpawnPositionX && position_y > kSpawnPositionY - map.kScale * 2) {
+			current_direction = Direction::up;
+		} 
+		else if (position_y <= kSpawnPositionY - map.kScale * 2) {
+			escape = false;
+		}
+	}
 }
 
 void Ghost::Teleport(Map map) {
@@ -141,18 +151,21 @@ void Ghost::Kill() {
 void Ghost::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
+
+	escape = true;
 }
 
-// Returns true if the player died, if the player ate the ghost, kills the ghost and returns false, otherwise just returns false
+// Returns true if the player died, if the player ate the ghost, kills the ghost
+// and returns false, otherwise just returns false
 bool Ghost::PlayerCollision(int position_x, int position_y, State game_state, Map map) {
-    if ((this->position_x - map.kOffsetX) / map.kScale == (position_x - map.kOffsetX) / map.kScale &&
-        (this->position_y - map.kOffsetY) / map.kScale == (position_y - map.kOffsetY) / map.kScale) {
+    if ((this->position_x - map.kOffsetX) / map.kScale == (position_x - map.kOffsetX) / map.kScale && (this->position_y - map.kOffsetY) / map.kScale == (position_y - map.kOffsetY) / map.kScale) {
         if (game_state == State::regular) {
-			return true;
-		} else if (game_state == State::unscaring || game_state == State::scared) {
-			Kill();
-			return false;
-		}
-	}
-	return false;
+            return true;
+        } else if (game_state == State::unscaring ||
+                   game_state == State::scared) {
+            Kill();
+            return false;
+        }
+    }
+    return false;
 }

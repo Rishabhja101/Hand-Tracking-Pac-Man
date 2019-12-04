@@ -3,6 +3,7 @@
 Ghost::Ghost() {
     ResetPosition();
     current_direction = Direction::none;
+    escape = true;
 }
 
 void Ghost::Draw(State game_state, bool blink) {
@@ -20,7 +21,7 @@ void Ghost::Draw(State game_state, bool blink) {
 
 void Ghost::Update(Map map) {
     Collisions(map);
-    CalculateNextDirection();
+    CalculateNextDirection(map);
 
     if (current_direction == Direction::up) {
         position_y -= kSpeed;
@@ -92,7 +93,7 @@ void Ghost::Collisions(Map map) {
     }
 }
 
-void Ghost::CalculateNextDirection() {
+void Ghost::CalculateNextDirection(Map map) {
     if (current_direction == Direction::none ||
         ((current_direction == Direction::right ||
           current_direction == Direction::left) &&
@@ -112,6 +113,15 @@ void Ghost::CalculateNextDirection() {
             dir = ofRandom(0, 4);
         }
         current_direction = static_cast<Direction>(dir);
+    }
+
+    if (escape) {
+        if (position_x == kSpawnPositionX &&
+            position_y > kSpawnPositionY - map.kScale * 2) {
+            current_direction = Direction::up;
+        } else if (position_y <= kSpawnPositionY - map.kScale * 2) {
+            escape = false;
+        }
     }
 }
 

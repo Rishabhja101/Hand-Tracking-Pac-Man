@@ -37,3 +37,4 @@
   - Ghosts now respawn when eaten by the player
   - Player now respawns upon colliding with the ghost
   - Player now loses lives when it dies
+  - Player and Ghost respawn at their correct positions and Ghost can escape the ghost cage
