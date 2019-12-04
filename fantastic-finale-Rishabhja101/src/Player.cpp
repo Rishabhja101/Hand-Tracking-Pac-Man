@@ -13,8 +13,12 @@ void Player::Draw() {
     ofDrawCircle(position_x, position_y, kRadius);
 }
 
-void Player::Update(Map map) {
-    Collisions(map);
+void Player::Update(Map map, State game_state) {
+    if (game_state == State::starting || game_state == State::death) {
+        return;
+    }
+	
+	Collisions(map);
 
     if (possible_directions[next_direction]) {
         current_direction = next_direction;
@@ -142,7 +146,6 @@ bool Player::HasPowerup() {
 void Player::Kill() {
     ResetPosition();
     lives--;
-    death_music.play();
     cout << "lives " << lives << endl;
 }
 
@@ -162,7 +165,6 @@ int Player::GetPositionY() {
 	return position_y;
 }
 
-void Player::LoadMusic(ofSoundPlayer death_music, ofSoundPlayer eat_music) {
-    this->death_music = death_music;
+void Player::LoadMusic(ofSoundPlayer eat_music) {
     this->eat_music = eat_music;
 }

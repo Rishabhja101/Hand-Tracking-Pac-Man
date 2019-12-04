@@ -8,13 +8,13 @@ class Player {
    public:
     Player();
     void Draw();
-    void Update(Map map);
+    void Update(Map map, State game_state);
     void ChangeDirection(Direction new_direction);
     bool HasPowerup();
     void Kill();
     int GetPositionX();
     int GetPositionY();
-    void LoadMusic(ofSoundPlayer death_music, ofSoundPlayer eat_music);
+    void LoadMusic(ofSoundPlayer eat_music);
 
    private:
     const int kSpeed = 10;
@@ -32,7 +32,6 @@ class Player {
     Direction next_direction;
     bool possible_directions[4];
     bool powerup;
-    ofSoundPlayer death_music;
     ofSoundPlayer eat_music;
 
     void Collisions(Map map);

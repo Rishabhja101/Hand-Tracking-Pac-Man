@@ -3,5 +3,7 @@
 enum State { 
 	regular, 
 	scared,
-	unscaring
+	unscaring,
+	starting,
+	death
 };

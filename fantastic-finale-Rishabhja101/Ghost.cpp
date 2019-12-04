@@ -3,11 +3,13 @@
 Ghost::Ghost() {
     ResetPosition();
     current_direction = Direction::none;
+    death_music.load(kMusicPath);
     escape = true;
 }
 
 void Ghost::Draw(State game_state, bool blink) {
-    if (game_state == State::regular) {
+    if (game_state == State::regular || game_state == State::death ||
+        game_state == State::starting) {
         ofSetColor(0, 255, 0);
     } else if (game_state == State::scared ||
                (game_state == State::unscaring && blink)) {
@@ -19,7 +21,11 @@ void Ghost::Draw(State game_state, bool blink) {
     ofDrawCircle(position_x, position_y, kRadius);
 }
 
-void Ghost::Update(Map map) {
+void Ghost::Update(Map map, State game_state) {
+    if (game_state == State::starting || game_state == State::death) {
+        return;
+    }
+
     Collisions(map);
     CalculateNextDirection(map);
 
@@ -115,14 +121,14 @@ void Ghost::CalculateNextDirection(Map map) {
         current_direction = static_cast<Direction>(dir);
     }
 
-	if (escape) {
-        if (position_x == kSpawnPositionX && position_y > kSpawnPositionY - map.kScale * 2) {
-			current_direction = Direction::up;
-		} 
-		else if (position_y <= kSpawnPositionY - map.kScale * 2) {
-			escape = false;
-		}
-	}
+    if (escape) {
+        if (position_x == kSpawnPositionX &&
+            position_y > kSpawnPositionY - map.kScale * 2) {
+            current_direction = Direction::up;
+        } else if (position_y <= kSpawnPositionY - map.kScale * 2) {
+            escape = false;
+        }
+    }
 }
 
 void Ghost::Teleport(Map map) {
@@ -144,21 +150,26 @@ void Ghost::Teleport(Map map) {
     }
 }
 
-void Ghost::Kill() { 
-	ResetPosition(); 
+void Ghost::Kill() {
+    death_music.play();
+    ResetPosition();
 }
 
 void Ghost::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
-	escape = true;
+    escape = true;
 }
 
 // Returns true if the player died, if the player ate the ghost, kills the ghost
 // and returns false, otherwise just returns false
-bool Ghost::PlayerCollision(int position_x, int position_y, State game_state, Map map) {
-    if ((this->position_x - map.kOffsetX) / map.kScale == (position_x - map.kOffsetX) / map.kScale && (this->position_y - map.kOffsetY) / map.kScale == (position_y - map.kOffsetY) / map.kScale) {
+bool Ghost::PlayerCollision(int position_x, int position_y, State game_state,
+                            Map map) {
+    if ((this->position_x - map.kOffsetX) / map.kScale ==
+            (position_x - map.kOffsetX) / map.kScale &&
+        (this->position_y - map.kOffsetY) / map.kScale ==
+            (position_y - map.kOffsetY) / map.kScale) {
         if (game_state == State::regular) {
             return true;
         } else if (game_state == State::unscaring ||

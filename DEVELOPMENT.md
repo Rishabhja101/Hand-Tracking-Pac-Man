@@ -40,4 +40,5 @@
   - Player and Ghost respawn at their correct positions and Ghost can escape the ghost cage
 
  - **12/04/19** Added sounds for start game, collecting coin, dying, and eating ghosts
- 
+  - Added delays to game to match music
+  - Added respawn time for ghost

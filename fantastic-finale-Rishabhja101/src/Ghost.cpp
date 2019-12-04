@@ -8,7 +8,7 @@ Ghost::Ghost() {
 }
 
 void Ghost::Draw(State game_state, bool blink) {
-    if (game_state == State::regular) {
+    if (game_state == State::regular || game_state == State::death || game_state == State::starting) {
         ofSetColor(0, 255, 0);
     } else if (game_state == State::scared ||
                (game_state == State::unscaring && blink)) {
@@ -20,7 +20,15 @@ void Ghost::Draw(State game_state, bool blink) {
     ofDrawCircle(position_x, position_y, kRadius);
 }
 
-void Ghost::Update(Map map) {
+void Ghost::Update(Map map, State game_state) {
+	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kRespawnTime) {
+            escape = true;
+	}
+
+    if (game_state == State::starting || game_state == State::death) {
+        return;
+	}
+
     Collisions(map);
     CalculateNextDirection(map);
 
@@ -154,7 +162,7 @@ void Ghost::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
-    escape = true;
+	respawn_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 }
 
 // Returns true if the player died, if the player ate the ghost, kills the ghost

@@ -6,7 +6,7 @@ class Ghost {
    public:
     Ghost();
     void Draw(State game_state, bool blink);
-    void Update(Map map);
+    void Update(Map map, State game_state);
     bool PlayerCollision(int position_x, int position_y, State game_state, Map map);
     void ResetPosition();
 
@@ -16,6 +16,7 @@ class Ghost {
     const int kSpawnPositionX = 680;
     const int kSpawnPositionY = 680;
     const string kMusicPath = "pacman_eatghost.wav";
+    const int kRespawnTime = 5;
 
     int position_x;
     int position_y;
@@ -23,6 +24,7 @@ class Ghost {
     bool possible_directions[4];
     bool escape;
     ofSoundPlayer death_music;
+    time_t respawn_time;
 
     void Collisions(Map map);
     void CalculateNextDirection(Map map);
