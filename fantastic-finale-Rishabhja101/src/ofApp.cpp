@@ -7,6 +7,11 @@ Map ofApp::map;
 void ofApp::setup() { 
 	ofBackground(0, 0, 0);
 
+	for (int i = 0; i < 5; i++) {
+            Ghost g;
+            ghosts.push_back(g);
+	}
+
 	blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     blink = false;
     game_state = State::starting;
@@ -29,7 +34,11 @@ void ofApp::update() {
 	else if (game_state == State::death && sound_delay_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kDyingTime) {
 		game_state = State::starting;
         game_music.play();
-        ghost.ResetPosition();
+
+		for (int i = 0; i < 5; i++) {
+            ghosts[i].ResetPosition();
+        }
+
         player.Kill();
 		sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	}
@@ -56,25 +65,34 @@ void ofApp::update() {
 
 	input.Update();
 	player.Update(map, game_state);
-    ghost.Update(map, game_state);
+
+	for (int i = 0; i < 5; i++) {
+        ghosts[i].Update(map, game_state);
+    }
 
 	if (player.HasPowerup()){
         game_state = State::scared;
         scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	}
 
-	if (ghost.PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
-        game_state = State::death;
-        death_music.play();
-		sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-	}
+	for (int i = 0; i < 5; i++) {
+		if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
+			game_state = State::death;
+			death_music.play();
+			sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+		}
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
 	input.Draw();
     map.Draw(blink);
-    ghost.Draw(game_state, blink);
+
+	for (int i = 0; i < 5; i++) {
+        ghosts[i].Draw(game_state, blink);
+    }
+
     player.Draw();
 }
 

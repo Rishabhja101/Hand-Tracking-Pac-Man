@@ -44,3 +44,5 @@
   - Added respawn time for ghost
   - Player's mouth opens and closes
   - Player can now be controlled through the camera
+
+- **12/08/19** Added multiple ghosts

@@ -38,8 +38,8 @@ class ofApp : public ofBaseApp {
     static Map map;
     static Player player;
     CameraInput input;
-    Ghost ghost;
     State game_state;
     ofSoundPlayer game_music;
     ofSoundPlayer death_music;
+    vector<Ghost> ghosts;
 };
