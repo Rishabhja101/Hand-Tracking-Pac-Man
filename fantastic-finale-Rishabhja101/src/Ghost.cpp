@@ -21,7 +21,8 @@ void Ghost::Draw(State game_state, bool blink) {
 }
 
 void Ghost::Update(Map map, State game_state) {
-	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kRespawnTime) {
+    cout << respawn_delay << endl;
+	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - respawn_delay) {
             escape = true;
 	}
 
@@ -162,6 +163,7 @@ void Ghost::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
+	respawn_delay = kRespawnTime;
 	respawn_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 }
 
@@ -188,4 +190,8 @@ void Ghost::SetColor(int r, int g, int b) {
 	color_r = r;
     color_g = g;
     color_b = b;
+}
+
+void Ghost::SetRespawnTime(int delay) {
+	respawn_delay = delay;
 }

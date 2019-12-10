@@ -10,6 +10,7 @@ class Ghost {
     bool PlayerCollision(int position_x, int position_y, State game_state, Map map);
     void ResetPosition();
     void SetColor(int r, int g, int b);
+    void SetRespawnTime(int delay);
 
    private:
     const int kSpeed = 5;
@@ -29,6 +30,7 @@ class Ghost {
     int color_r;
     int color_g;
     int color_b;
+    int respawn_delay;
 
     void Collisions(Map map);
     void CalculateNextDirection(Map map);

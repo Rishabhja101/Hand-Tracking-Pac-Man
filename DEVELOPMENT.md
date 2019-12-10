@@ -48,3 +48,4 @@
 - **12/08/19** Added multiple ghosts
 
 - **12/10/19** Gave each ghost a unique color
+  - Added different respawn delays for each ghost
