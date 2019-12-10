@@ -5,5 +5,7 @@ enum State {
 	scared,
 	unscaring,
 	starting,
-	death
+	death,
+	start,
+	ended
 };

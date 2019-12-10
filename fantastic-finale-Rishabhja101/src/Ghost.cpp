@@ -21,7 +21,6 @@ void Ghost::Draw(State game_state, bool blink) {
 }
 
 void Ghost::Update(Map map, State game_state) {
-    cout << respawn_delay << endl;
 	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - respawn_delay) {
             escape = true;
 	}

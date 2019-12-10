@@ -15,6 +15,7 @@ class Player {
     int GetPositionX();
     int GetPositionY();
     void LoadMusic(ofSoundPlayer eat_music);
+    bool IsDead();
 
    private:
     const int kSpeed = 10;
