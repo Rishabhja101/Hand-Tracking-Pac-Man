@@ -46,3 +46,5 @@
   - Player can now be controlled through the camera
 
 - **12/08/19** Added multiple ghosts
+
+- **12/10/19** Gave each ghost a unique color

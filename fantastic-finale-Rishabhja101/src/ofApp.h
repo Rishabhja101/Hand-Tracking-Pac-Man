@@ -42,4 +42,5 @@ class ofApp : public ofBaseApp {
     ofSoundPlayer game_music;
     ofSoundPlayer death_music;
     vector<Ghost> ghosts;
+
 };

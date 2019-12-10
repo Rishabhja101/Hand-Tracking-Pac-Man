@@ -9,7 +9,7 @@ Ghost::Ghost() {
 
 void Ghost::Draw(State game_state, bool blink) {
     if (game_state == State::regular || game_state == State::death || game_state == State::starting) {
-        ofSetColor(0, 255, 0);
+        ofSetColor(color_r, color_g, color_b);
     } else if (game_state == State::scared ||
                (game_state == State::unscaring && blink)) {
         ofSetColor(0, 0, 255);
@@ -182,4 +182,10 @@ bool Ghost::PlayerCollision(int position_x, int position_y, State game_state,
         }
     }
     return false;
+}
+
+void Ghost::SetColor(int r, int g, int b) { 
+	color_r = r;
+    color_g = g;
+    color_b = b;
 }

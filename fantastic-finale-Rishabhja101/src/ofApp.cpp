@@ -7,10 +7,15 @@ Map ofApp::map;
 void ofApp::setup() { 
 	ofBackground(0, 0, 0);
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 4; i++) {
             Ghost g;
             ghosts.push_back(g);
 	}
+
+	ghosts[0].SetColor(255, 0, 0 );		// red
+    ghosts[1].SetColor(255, 128, 0);	// pink
+    ghosts[2].SetColor(225, 102, 225);	// pink
+    ghosts[3].SetColor(0, 255, 255);	// blue
 
 	blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     blink = false;
@@ -35,7 +40,7 @@ void ofApp::update() {
 		game_state = State::starting;
         game_music.play();
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < ghosts.size(); i++) {
             ghosts[i].ResetPosition();
         }
 
@@ -66,7 +71,7 @@ void ofApp::update() {
 	input.Update();
 	player.Update(map, game_state);
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < ghosts.size(); i++) {
         ghosts[i].Update(map, game_state);
     }
 
@@ -75,7 +80,7 @@ void ofApp::update() {
         scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	}
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < ghosts.size(); i++) {
 		if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
 			game_state = State::death;
 			death_music.play();
@@ -89,7 +94,7 @@ void ofApp::draw() {
 	input.Draw();
     map.Draw(blink);
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < ghosts.size(); i++) {
         ghosts[i].Draw(game_state, blink);
     }
 
