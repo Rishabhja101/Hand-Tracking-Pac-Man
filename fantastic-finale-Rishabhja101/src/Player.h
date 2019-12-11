@@ -22,7 +22,7 @@ class Player {
     void Reset();
 
    private:
-    const int kSpeed = 10;
+    const int kSpeed = 6;
     const int kRadius = 20;
     const int kSpawnPositionX = 680;
     const int kSpawnPositionY = 1040;

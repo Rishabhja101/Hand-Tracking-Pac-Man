@@ -26,8 +26,8 @@ class CameraInput {
     const int kHeight = 240;
     const int kTolerance = 5;
     const int kRadius = 10;
-    const int kOffset_x = 1350;
-    const int kOffset_y = 1200;
+    const int kOffset_x = 1340;
+    const int kOffset_y = 1125;
 
     int findHue;
 };
