@@ -34,6 +34,7 @@ class ofApp : public ofBaseApp {
     const string kEatMusicPath = "pacman_chomp.wav";
     const int kScoreLength = 5;
     const string kFontPath = "Gravedigger-8BOZ.ttf";
+    const string kHighScorePath = "high_score.txt";
 
 	time_t scared_timer;
     time_t blink_timer;
@@ -47,4 +48,5 @@ class ofApp : public ofBaseApp {
     ofSoundPlayer death_music;
     vector<Ghost> ghosts;
     ofTrueTypeFont main_font;
+    int high_score;
 };

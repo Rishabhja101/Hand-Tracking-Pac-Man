@@ -1,4 +1,6 @@
 #include "ofApp.h"
+#include "fstream"
+#include "iostream"
 
 Player ofApp::player;
 Map ofApp::map;
@@ -22,11 +24,17 @@ void ofApp::setup() {
     eat_music.load(kEatMusicPath);
     player.LoadMusic(eat_music);
 
-	game_state = State::start;
+    game_state = State::start;
     cout << "start game" << endl;
 
-	main_font.load(kFontPath, 20);
+    main_font.load(kFontPath, 20);
     main_font.drawString("Press any key to start game", 10, 40);
+
+	ifstream reader(kHighScorePath);
+    string line;
+    getline(reader, line);
+    high_score = stoi(line);
+	reader.close();
 }
 
 //--------------------------------------------------------------
@@ -35,9 +43,15 @@ void ofApp::update() {
         return;
     }
 
-    if (game_state == State::starting && sound_delay_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kStartingTime) {
+    if (game_state == State::starting &&
+        sound_delay_time ==
+            chrono::system_clock::to_time_t(chrono::system_clock::now()) -
+                kStartingTime) {
         game_state = State::regular;
-    } else if (game_state == State::death && sound_delay_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kDyingTime) {
+    } else if (game_state == State::death &&
+               sound_delay_time == chrono::system_clock::to_time_t(
+                                       chrono::system_clock::now()) -
+                                       kDyingTime) {
         game_state = State::starting;
         game_music.play();
 
@@ -47,7 +61,8 @@ void ofApp::update() {
         }
 
         player.Kill();
-        sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        sound_delay_time =
+            chrono::system_clock::to_time_t(chrono::system_clock::now());
     }
 
     // get the new direction for the player
@@ -103,14 +118,22 @@ void ofApp::update() {
     if (player.IsDead()) {
         game_state = State::ended;
         cout << "game over" << endl;
-	}
+
+		if (player.GetScore() > high_score) {
+            high_score = player.GetScore();
+		}
+
+		ofstream output(kHighScorePath);
+        output << high_score << endl;
+        output.close();
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
     if (game_state == State::start || game_state == State::ended) {
         return;
-	}
+    }
 
     input.Draw();
     map.Draw(blink);
@@ -121,38 +144,41 @@ void ofApp::draw() {
 
     player.Draw();
 
-	int high_score = 0;
-
-	if (player.GetScore() > high_score) {
+    if (player.GetScore() > high_score) {
         high_score = player.GetScore();
-	}
+    }
 
-	string score_high = to_string(high_score);
-	string score = to_string(player.GetScore());
-    //string high_score;
+    string score_high = to_string(high_score);
+    string score = to_string(player.GetScore());
 
-	string temp;
+    string temp;
     for (int i = 0; i < 5 - score.length(); i++) {
         temp += "0";
-	}
-	temp += score;
+    }
+    temp += score;
     score = temp;
 
-	temp = "";
-	for (int i = 0; i < 5 - score_high.length(); i++) {
-    temp += "0";
+    temp = "";
+    for (int i = 0; i < 5 - score_high.length(); i++) {
+        temp += "0";
     }
     temp += score_high;
     score_high = temp;
 
-	ofSetColor(255, 255, 255);
-	main_font.drawString("High Score", map.kOffsetX + map.kScale * 3.5, map.kOffsetY);
-	main_font.drawString("Score", map.kOffsetX + map.kScale * 9.5, map.kOffsetY);
-	main_font.drawString("Lives", map.kOffsetX + map.kScale * 15, map.kOffsetY);
+    ofSetColor(255, 255, 255);
+    main_font.drawString("High Score", map.kOffsetX + map.kScale * 3.5,
+                         map.kOffsetY);
+    main_font.drawString("Score", map.kOffsetX + map.kScale * 9.5,
+                         map.kOffsetY);
+    main_font.drawString("Lives", map.kOffsetX + map.kScale * 15, map.kOffsetY);
 
-	main_font.drawString(score_high, map.kOffsetX + map.kScale * 4.5, map.kOffsetY + map.kScale * 0.5);
-	main_font.drawString(score, map.kOffsetX + map.kScale * 9.5, map.kOffsetY + map.kScale * 0.5);
-    main_font.drawString(to_string(player.GetLives()), map.kOffsetX + map.kScale * 15.75, map.kOffsetY + map.kScale * 0.5);
+    main_font.drawString(score_high, map.kOffsetX + map.kScale * 4.5,
+                         map.kOffsetY + map.kScale * 0.5);
+    main_font.drawString(score, map.kOffsetX + map.kScale * 9.5,
+                         map.kOffsetY + map.kScale * 0.5);
+    main_font.drawString(to_string(player.GetLives()),
+                         map.kOffsetX + map.kScale * 15.75,
+                         map.kOffsetY + map.kScale * 0.5);
 }
 
 //--------------------------------------------------------------
@@ -167,7 +193,7 @@ void ofApp::keyPressed(int key) {
         player.ChangeDirection(Direction::down);
     } else if (game_state == State::start) {
         NewGame();
-	}
+    }
 }
 
 //--------------------------------------------------------------
@@ -204,7 +230,8 @@ void ofApp::dragEvent(ofDragInfo dragInfo) {}
 
 void ofApp::NewGame() {
     blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
-    sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    sound_delay_time =
+        chrono::system_clock::to_time_t(chrono::system_clock::now());
     game_music.load(kGameMusicPath);
     death_music.load(kDeathMusicPath);
     game_music.play();

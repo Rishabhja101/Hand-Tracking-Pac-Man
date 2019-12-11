@@ -46,6 +46,7 @@ void Map::LoadMap(string file_path) {
         getline(reader, line);
         map.push_back(line);
     }
+    reader.close();
 
     height = map.size();
     if (height > 0) {
