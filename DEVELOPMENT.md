@@ -56,3 +56,5 @@
   - Created opening title screen and closing screen
   - Added nice looking title and closing screens
   - At game over, user can choose to start a new game
+
+- **12/11/19** Added some comments and changed small things in the code

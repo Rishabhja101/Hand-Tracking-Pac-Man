@@ -8,20 +8,9 @@ class ofApp : public ofBaseApp {
     void setup();
     void update();
     void draw();
-
-    void NewGame();
-
     void keyPressed(int key);
-    void keyReleased(int key);
-    void mouseMoved(int x, int y);
-    void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
-    void mouseReleased(int x, int y, int button);
-    void mouseEntered(int x, int y);
-    void mouseExited(int x, int y);
-    void windowResized(int w, int h);
-    void dragEvent(ofDragInfo dragInfo);
-    void gotMessage(ofMessage msg);
+    void NewGame();
 
    private:
     const int kBlinkSpeed = 1;
@@ -37,7 +26,7 @@ class ofApp : public ofBaseApp {
     const string kTitleFontPath = "FridayNightLights-l5pe.ttf";
     const string kSecondFontPath = "HeadlinerNo45-59y8.ttf";
     const string kHighScorePath = "high_score.txt";
-    const bool kCameraInput = false;
+    const bool kCameraInput = true;
 
     time_t scared_timer;
     time_t blink_timer;

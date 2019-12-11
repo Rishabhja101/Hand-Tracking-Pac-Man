@@ -1256,9 +1256,4 @@
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\map_data.txt">
-      <Filter>src</Filter>
-    </Text>
-  </ItemGroup>
 </Project>

@@ -22,9 +22,9 @@ void CameraInput::Draw() {
     ofSetColor(255, 0, 0);
     ofFill();
 
-    // draw red circles for found blobs
-    for (int i = 0; i < contours.nBlobs; i++) {
-        ofCircle(contours.blobs[i].centroid.x - kRadius / 2 + kOffset_x, contours.blobs[i].centroid.y - kRadius / 2 + kOffset_y, kRadius);
+    // draw red circles for blob if one is found
+    if (contours.nBlobs > 0) {
+        ofCircle(contours.blobs[0].centroid.x - kRadius / 2 + kOffset_x, contours.blobs[0].centroid.y - kRadius / 2 + kOffset_y, kRadius);
     }
 }
 
@@ -76,9 +76,9 @@ void CameraInput::CalibrateCamera(int x, int y) {
 
 // Returns the direction that the tracked color indicates
 Direction CameraInput::GetDirection() {
-    for (int i = 0; i < contours.nBlobs; i++) {
-        int x = contours.blobs[i].centroid.x;
-        int y = -contours.blobs[i].centroid.y;
+    if (contours.nBlobs > 0) {
+        int x = contours.blobs[0].centroid.x;
+        int y = -contours.blobs[0].centroid.y;
         int height = camera.getHeight();
        
 		// up
