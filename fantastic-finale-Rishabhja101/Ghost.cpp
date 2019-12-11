@@ -9,7 +9,8 @@ Ghost::Ghost() {
 
 void Ghost::Draw(State game_state, bool blink) {
     if (game_state == State::regular || game_state == State::death ||
-        game_state == State::starting) {
+        game_state == State::starting || game_state == State::start ||
+        game_state == State::ended) {
         ofSetColor(color_r, color_g, color_b);
     } else if (game_state == State::scared ||
                (game_state == State::unscaring && blink)) {

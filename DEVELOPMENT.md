@@ -53,3 +53,6 @@
   - Added display for score, high score, and lives
   - Game now keeps track of high score between multiple games
   - Map is reloaded after player collects all coins and powerups
+  - Created opening title screen and closing screen
+  - Added nice looking title and closing screens
+  - At game over, user can choose to start a new game

@@ -19,6 +19,7 @@ class Player {
     bool IsDead();
     int GetLives();
     int GetScore();
+    void Reset();
 
    private:
     const int kSpeed = 10;

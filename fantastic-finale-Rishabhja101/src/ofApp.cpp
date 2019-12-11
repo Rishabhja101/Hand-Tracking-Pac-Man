@@ -30,7 +30,8 @@ void ofApp::setup() {
     cout << "start game" << endl;
 
     main_font.load(kFontPath, 20);
-    main_font.drawString("Press any key to start game", 10, 40);
+    title_font.load(kTitleFontPath, 150);
+    secondary_font.load(kSecondFontPath, 75);
 
     ifstream reader(kHighScorePath);
     string line;
@@ -67,8 +68,10 @@ void ofApp::update() {
             chrono::system_clock::to_time_t(chrono::system_clock::now());
     }
 
-    // get the new direction for the player
-    //    player.ChangeDirection(input.GetDirection());
+    if (kCameraInput) {
+		// get the new direction for the player
+		player.ChangeDirection(input.GetDirection());
+    }
 
     // flip the bool for blinking if the blink time has elapsed
     if (blink_timer ==
@@ -108,24 +111,25 @@ void ofApp::update() {
     }
 
     for (int i = 0; i < ghosts.size(); i++) {
-        if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
+        if (ghosts[i].PlayerCollision(player.GetPositionX(),
+                                      player.GetPositionY(), game_state, map)) {
             if (player.IsDead()) {
                 game_state = State::ended;
                 cout << "game over" << endl;
 
-				if (player.GetScore() > high_score) {
-					high_score = player.GetScore();
-				}
+                if (player.GetScore() > high_score) {
+                    high_score = player.GetScore();
+                }
 
-				ofstream output(kHighScorePath);
-				output << high_score << endl;
-				output.close();
-            } 
-			else {
-                sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-				game_state = State::death;
-			}
-			
+                ofstream output(kHighScorePath);
+                output << high_score << endl;
+                output.close();
+            } else {
+                sound_delay_time = chrono::system_clock::to_time_t(
+                    chrono::system_clock::now());
+                game_state = State::death;
+            }
+
             death_music.play();
         }
     }
@@ -137,18 +141,14 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    if (game_state == State::start) {
-        return;
-    }
-
     input.Draw();
     map.Draw(blink);
+
+    player.Draw();
 
     for (int i = 0; i < ghosts.size(); i++) {
         ghosts[i].Draw(game_state, blink);
     }
-
-    player.Draw();
 
     if (player.GetScore() > high_score) {
         high_score = player.GetScore();
@@ -185,21 +185,37 @@ void ofApp::draw() {
     main_font.drawString(to_string(player.GetLives()),
                          map.kOffsetX + map.kScale * 15.75,
                          map.kOffsetY + map.kScale * 0.5);
+
+    if (game_state == State::start) {
+        ofSetColor(255, 255, 0);
+        title_font.drawString("PacMan", 300, 500);
+        secondary_font.drawString("PRESS ANY KEY TO START GAME", 270, 950);
+    } 
+	else if (game_state == State::ended) {
+        ofSetColor(255, 255, 0);
+        title_font.drawString("Game Over", 170, 500);
+        secondary_font.drawString("PRESS ANY KEY TO START A NEW GAME", 170, 950);
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
-    if (key == OF_KEY_RIGHT) {
-        player.ChangeDirection(Direction::right);
-    } else if (key == OF_KEY_LEFT) {
-        player.ChangeDirection(Direction::left);
-    } else if (key == OF_KEY_UP) {
-        player.ChangeDirection(Direction::up);
-    } else if (key == OF_KEY_DOWN) {
-        player.ChangeDirection(Direction::down);
-    } else if (game_state == State::start) {
-        NewGame();
+    if (game_state == State::start || game_state == State::ended) {
+        player.Reset();
+		NewGame();
     }
+
+	if (!kCameraInput){
+		if (key == OF_KEY_RIGHT) {
+			player.ChangeDirection(Direction::right);
+		} else if (key == OF_KEY_LEFT) {
+			player.ChangeDirection(Direction::left);
+		} else if (key == OF_KEY_UP) {
+			player.ChangeDirection(Direction::up);
+		} else if (key == OF_KEY_DOWN) {
+			player.ChangeDirection(Direction::down);
+		}
+	}
 }
 
 //--------------------------------------------------------------
@@ -245,7 +261,7 @@ void ofApp::NewGame() {
     map.LoadMap();
     player.ResetPosition();
 
-	for (int i = 0; i < ghosts.size(); i++) {
+    for (int i = 0; i < ghosts.size(); i++) {
         ghosts[i].ResetPosition();
     }
 }

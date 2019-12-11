@@ -9,7 +9,7 @@ class ofApp : public ofBaseApp {
     void update();
     void draw();
 
-	void NewGame();
+    void NewGame();
 
     void keyPressed(int key);
     void keyReleased(int key);
@@ -34,11 +34,14 @@ class ofApp : public ofBaseApp {
     const string kEatMusicPath = "pacman_chomp.wav";
     const int kScoreLength = 5;
     const string kFontPath = "Gravedigger-8BOZ.ttf";
+    const string kTitleFontPath = "FridayNightLights-l5pe.ttf";
+    const string kSecondFontPath = "HeadlinerNo45-59y8.ttf";
     const string kHighScorePath = "high_score.txt";
+    const bool kCameraInput = false;
 
-	time_t scared_timer;
+    time_t scared_timer;
     time_t blink_timer;
-	time_t sound_delay_time;
+    time_t sound_delay_time;
     bool blink;
     static Map map;
     static Player player;
@@ -48,5 +51,7 @@ class ofApp : public ofBaseApp {
     ofSoundPlayer death_music;
     vector<Ghost> ghosts;
     ofTrueTypeFont main_font;
+    ofTrueTypeFont title_font;
+    ofTrueTypeFont secondary_font;
     int high_score;
 };

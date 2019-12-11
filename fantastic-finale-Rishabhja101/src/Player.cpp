@@ -4,7 +4,7 @@ Player::Player() {
     score = 0;
     powerup = false;
     lives = kStartingLives;
-    
+
     ResetPosition();
 }
 
@@ -12,72 +12,67 @@ void Player::Draw() {
     ofSetColor(255, 255, 0);
     ofDrawCircle(position_x, position_y, kRadius);
 
-	ofSetColor(0, 0, 0);
+    ofSetColor(0, 0, 0);
 
-	if (current_direction != Direction::none) {
+    if (current_direction != Direction::none) {
         last_direction = current_direction;
-	}
+    }
 
-	double radius = kRadius * 1.1;
+    double radius = kRadius * 1.1;
 
-	if (last_direction == Direction::down) {
-                    ofDrawTriangle(position_x, position_y,
-                                   position_x + radius * sin(mouth_angle),
-                                   position_y + radius * cos(mouth_angle),
-                                   position_x - radius * sin(mouth_angle),
-                                   position_y + radius * cos(mouth_angle));
-            ofDrawTriangle(position_x,
-                           position_y + 2 * radius * cos(mouth_angle),
-                           position_x + radius * sin(mouth_angle),
-                           position_y + radius * cos(mouth_angle),
-                           position_x - radius * sin(mouth_angle),
-                           position_y + radius * cos(mouth_angle));
-	} 
-	else if (last_direction == Direction::up) {
-            ofDrawTriangle(position_x, position_y,
-                           position_x + radius * sin(mouth_angle),
-                           position_y - radius * cos(mouth_angle),
-                           position_x - radius * sin(mouth_angle),
-                           position_y - radius * cos(mouth_angle));
-            ofDrawTriangle(position_x,
-                           position_y - 2 * radius * cos(mouth_angle),
-                           position_x + radius * sin(mouth_angle),
-                           position_y - radius * cos(mouth_angle),
-                           position_x - radius * sin(mouth_angle),
-                           position_y - radius * cos(mouth_angle));
-	} 
-	else if (last_direction == Direction::left) {
-            ofDrawTriangle(position_x - 2 * radius * cos(mouth_angle), position_y,
-                           position_x - radius * cos(mouth_angle),
-                           position_y + radius * sin(mouth_angle),
-                           position_x - radius * cos(mouth_angle),
-                           position_y - radius * sin(mouth_angle));
-            ofDrawTriangle(position_x, position_y,
-                           position_x - radius * cos(mouth_angle),
-                           position_y + radius * sin(mouth_angle),
-                           position_x - radius * cos(mouth_angle),
-                           position_y - radius * sin(mouth_angle));
-	} 
-	else if (last_direction == Direction::right) {
-            ofDrawTriangle(position_x + 2 * radius * cos(mouth_angle), position_y,
-                           position_x + radius * cos(mouth_angle),
-                           position_y + radius * sin(mouth_angle),
-                           position_x + radius * cos(mouth_angle),
-                           position_y - radius * sin(mouth_angle));
-            ofDrawTriangle(position_x, position_y,
-                           position_x + radius * cos(mouth_angle),
-                           position_y + radius * sin(mouth_angle),
-                           position_x + radius * cos(mouth_angle),
-                           position_y - radius * sin(mouth_angle));
-	}
+    if (last_direction == Direction::down) {
+        ofDrawTriangle(position_x, position_y,
+                       position_x + radius * sin(mouth_angle),
+                       position_y + radius * cos(mouth_angle),
+                       position_x - radius * sin(mouth_angle),
+                       position_y + radius * cos(mouth_angle));
+        ofDrawTriangle(position_x, position_y + 2 * radius * cos(mouth_angle),
+                       position_x + radius * sin(mouth_angle),
+                       position_y + radius * cos(mouth_angle),
+                       position_x - radius * sin(mouth_angle),
+                       position_y + radius * cos(mouth_angle));
+    } else if (last_direction == Direction::up) {
+        ofDrawTriangle(position_x, position_y,
+                       position_x + radius * sin(mouth_angle),
+                       position_y - radius * cos(mouth_angle),
+                       position_x - radius * sin(mouth_angle),
+                       position_y - radius * cos(mouth_angle));
+        ofDrawTriangle(position_x, position_y - 2 * radius * cos(mouth_angle),
+                       position_x + radius * sin(mouth_angle),
+                       position_y - radius * cos(mouth_angle),
+                       position_x - radius * sin(mouth_angle),
+                       position_y - radius * cos(mouth_angle));
+    } else if (last_direction == Direction::left) {
+        ofDrawTriangle(position_x - 2 * radius * cos(mouth_angle), position_y,
+                       position_x - radius * cos(mouth_angle),
+                       position_y + radius * sin(mouth_angle),
+                       position_x - radius * cos(mouth_angle),
+                       position_y - radius * sin(mouth_angle));
+        ofDrawTriangle(position_x, position_y,
+                       position_x - radius * cos(mouth_angle),
+                       position_y + radius * sin(mouth_angle),
+                       position_x - radius * cos(mouth_angle),
+                       position_y - radius * sin(mouth_angle));
+    } else if (last_direction == Direction::right) {
+        ofDrawTriangle(position_x + 2 * radius * cos(mouth_angle), position_y,
+                       position_x + radius * cos(mouth_angle),
+                       position_y + radius * sin(mouth_angle),
+                       position_x + radius * cos(mouth_angle),
+                       position_y - radius * sin(mouth_angle));
+        ofDrawTriangle(position_x, position_y,
+                       position_x + radius * cos(mouth_angle),
+                       position_y + radius * sin(mouth_angle),
+                       position_x + radius * cos(mouth_angle),
+                       position_y - radius * sin(mouth_angle));
+    }
 }
 
 void Player::Update(Map map, State game_state) {
     if (game_state == State::starting || game_state == State::death) {
         return;
     }
-	
-	Collisions(map);
+
+    Collisions(map);
 
     if (possible_directions[next_direction]) {
         current_direction = next_direction;
@@ -98,13 +93,13 @@ void Player::Update(Map map, State game_state) {
 
     Teleport(map);
 
-	if (current_direction != Direction::none) {
-		mouth_angle += mouth_direction;
-	}
+    if (current_direction != Direction::none) {
+        mouth_angle += mouth_direction;
+    }
 
-	if (mouth_angle <= 0 || mouth_angle >= kMaxMouthDegree) {
+    if (mouth_angle <= 0 || mouth_angle >= kMaxMouthDegree) {
         mouth_direction *= -1;
-	}
+    }
 }
 
 // Returns true if the player hit a powerup otherwise returns false
@@ -224,33 +219,26 @@ void Player::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
-	mouth_angle = kMaxMouthDegree;
+    mouth_angle = kMaxMouthDegree;
     mouth_direction = -kMouthSpeed;
     current_direction = Direction::none;
     next_direction = Direction::none;
     last_direction = Direction::right;
 }
 
-int Player::GetPositionX() { 
-	return position_x; 
-}
+int Player::GetPositionX() { return position_x; }
 
-int Player::GetPositionY() {
-	return position_y;
-}
+int Player::GetPositionY() { return position_y; }
 
-void Player::LoadMusic(ofSoundPlayer eat_music) {
-    this->eat_music = eat_music;
-}
+void Player::LoadMusic(ofSoundPlayer eat_music) { this->eat_music = eat_music; }
 
-bool Player::IsDead() {
-	return lives == 0;
-}
+bool Player::IsDead() { return lives == 0; }
 
-int Player::GetLives() {
-	return lives;
-}
+int Player::GetLives() { return lives; }
 
-int Player::GetScore() {
-	return score;
+int Player::GetScore() { return score; }
+
+void Player::Reset() { 
+	lives = kStartingLives;
+    score = 0;
 }
