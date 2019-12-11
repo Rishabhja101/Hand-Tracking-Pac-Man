@@ -22,6 +22,8 @@ void ofApp::setup() {
 
     ofSoundPlayer eat_music;
     eat_music.load(kEatMusicPath);
+    game_music.load(kGameMusicPath);
+    death_music.load(kDeathMusicPath);
     player.LoadMusic(eat_music);
 
     game_state = State::start;
@@ -30,11 +32,11 @@ void ofApp::setup() {
     main_font.load(kFontPath, 20);
     main_font.drawString("Press any key to start game", 10, 40);
 
-	ifstream reader(kHighScorePath);
+    ifstream reader(kHighScorePath);
     string line;
     getline(reader, line);
     high_score = stoi(line);
-	reader.close();
+    reader.close();
 }
 
 //--------------------------------------------------------------
@@ -66,7 +68,7 @@ void ofApp::update() {
     }
 
     // get the new direction for the player
-    player.ChangeDirection(input.GetDirection());
+    //    player.ChangeDirection(input.GetDirection());
 
     // flip the bool for blinking if the blink time has elapsed
     if (blink_timer ==
@@ -106,32 +108,36 @@ void ofApp::update() {
     }
 
     for (int i = 0; i < ghosts.size(); i++) {
-        if (ghosts[i].PlayerCollision(player.GetPositionX(),
-                                      player.GetPositionY(), game_state, map)) {
-            game_state = State::death;
+        if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
+            if (player.IsDead()) {
+                game_state = State::ended;
+                cout << "game over" << endl;
+
+				if (player.GetScore() > high_score) {
+					high_score = player.GetScore();
+				}
+
+				ofstream output(kHighScorePath);
+				output << high_score << endl;
+				output.close();
+            } 
+			else {
+                sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+				game_state = State::death;
+			}
+			
             death_music.play();
-            sound_delay_time =
-                chrono::system_clock::to_time_t(chrono::system_clock::now());
         }
     }
 
-    if (player.IsDead()) {
-        game_state = State::ended;
-        cout << "game over" << endl;
-
-		if (player.GetScore() > high_score) {
-            high_score = player.GetScore();
-		}
-
-		ofstream output(kHighScorePath);
-        output << high_score << endl;
-        output.close();
+    if (map.IsEmpty()) {
+        NewGame();
     }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-    if (game_state == State::start || game_state == State::ended) {
+    if (game_state == State::start) {
         return;
     }
 
@@ -232,9 +238,14 @@ void ofApp::NewGame() {
     blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     sound_delay_time =
         chrono::system_clock::to_time_t(chrono::system_clock::now());
-    game_music.load(kGameMusicPath);
-    death_music.load(kDeathMusicPath);
     game_music.play();
     game_state = State::starting;
     blink = false;
+
+    map.LoadMap();
+    player.ResetPosition();
+
+	for (int i = 0; i < ghosts.size(); i++) {
+        ghosts[i].ResetPosition();
+    }
 }

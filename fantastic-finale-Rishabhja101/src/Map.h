@@ -22,6 +22,8 @@ class Map {
     int GetHeight();
     bool CollectCoin(int x, int y);
     bool GetPowerup(int x, int y);
+    bool IsEmpty();
+    void LoadMap();
 
    private:
     static vector<string> map;
@@ -33,5 +35,4 @@ class Map {
     int width;
     int height;
 
-    void LoadMap(string file_path);
 };

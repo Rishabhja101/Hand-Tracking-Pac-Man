@@ -12,6 +12,7 @@ class Player {
     void ChangeDirection(Direction new_direction);
     bool HasPowerup();
     void Kill();
+    void ResetPosition();
     int GetPositionX();
     int GetPositionY();
     void LoadMusic(ofSoundPlayer eat_music);
@@ -44,5 +45,4 @@ class Player {
 
     void Collisions(Map map);
     void Teleport(Map map);
-    void ResetPosition();
 };

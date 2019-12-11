@@ -52,3 +52,4 @@
   - Added empty menu and game over screens
   - Added display for score, high score, and lives
   - Game now keeps track of high score between multiple games
+  - Map is reloaded after player collects all coins and powerups

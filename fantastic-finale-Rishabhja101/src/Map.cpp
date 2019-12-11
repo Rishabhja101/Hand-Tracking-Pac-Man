@@ -3,7 +3,7 @@
 vector<string> Map::map;
 
 Map::Map() { 
-	LoadMap(kFilePath); 
+	LoadMap(); 
 }
 
 // Display the map along with all of its coins and powerups
@@ -39,8 +39,10 @@ void Map::Draw(bool blink) {
 }
 
 // Load a map from the given text file
-void Map::LoadMap(string file_path) {
-    ifstream reader(file_path);
+void Map::LoadMap() {
+    map.clear();
+
+    ifstream reader(kFilePath);
     while (!reader.eof()) {
         string line;
         getline(reader, line);
@@ -75,12 +77,23 @@ bool Map::CollectCoin(int x, int y) {
     return false;
 }
 
-// If there is a powerup on the given coordinate, remove the powerup and return true,
-// otherwise return false
+// If there is a powerup on the given coordinate, remove the powerup and return
+// true, otherwise return false
 bool Map::GetPowerup(int x, int y) {
     if (map[y][x] == kPowerup) {
         map[y][x] = kEmpty;
         return true;
     }
     return false;
+}
+
+bool Map::IsEmpty() { 
+	 for (int i = 0; i < map.size(); i++) {
+        for (int n = 0; n < map[i].length(); n++) {
+            if (map[i][n] == kCoin || map[i][n] == kPowerup) {
+                return false;
+			}
+		}
+	}
+    return true;
 }
