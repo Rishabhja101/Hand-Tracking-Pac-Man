@@ -246,3 +246,11 @@ void Player::LoadMusic(ofSoundPlayer eat_music) {
 bool Player::IsDead() {
 	return lives == 0;
 }
+
+int Player::GetLives() {
+	return lives;
+}
+
+int Player::GetScore() {
+	return score;
+}

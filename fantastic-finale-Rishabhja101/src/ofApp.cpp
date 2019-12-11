@@ -23,8 +23,10 @@ void ofApp::setup() {
     player.LoadMusic(eat_music);
 
 	game_state = State::start;
-
     cout << "start game" << endl;
+
+	main_font.load(kFontPath, 20);
+    main_font.drawString("Press any key to start game", 10, 40);
 }
 
 //--------------------------------------------------------------
@@ -118,6 +120,39 @@ void ofApp::draw() {
     }
 
     player.Draw();
+
+	int high_score = 0;
+
+	if (player.GetScore() > high_score) {
+        high_score = player.GetScore();
+	}
+
+	string score_high = to_string(high_score);
+	string score = to_string(player.GetScore());
+    //string high_score;
+
+	string temp;
+    for (int i = 0; i < 5 - score.length(); i++) {
+        temp += "0";
+	}
+	temp += score;
+    score = temp;
+
+	temp = "";
+	for (int i = 0; i < 5 - score_high.length(); i++) {
+    temp += "0";
+    }
+    temp += score_high;
+    score_high = temp;
+
+	ofSetColor(255, 255, 255);
+	main_font.drawString("High Score", map.kOffsetX + map.kScale * 3.5, map.kOffsetY);
+	main_font.drawString("Score", map.kOffsetX + map.kScale * 9.5, map.kOffsetY);
+	main_font.drawString("Lives", map.kOffsetX + map.kScale * 15, map.kOffsetY);
+
+	main_font.drawString(score_high, map.kOffsetX + map.kScale * 4.5, map.kOffsetY + map.kScale * 0.5);
+	main_font.drawString(score, map.kOffsetX + map.kScale * 9.5, map.kOffsetY + map.kScale * 0.5);
+    main_font.drawString(to_string(player.GetLives()), map.kOffsetX + map.kScale * 15.75, map.kOffsetY + map.kScale * 0.5);
 }
 
 //--------------------------------------------------------------
