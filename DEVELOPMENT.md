@@ -59,3 +59,4 @@
 
 - **12/11/19** Added some comments and changed small things in the code
   - Window size displays entire map when program starts
+  - Wrote README
