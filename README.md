@@ -23,7 +23,9 @@
 ### Windows
 
 - Clone this repository
-- Navigate to `fantastic-finale-Rishabhja101\fantastic-finale-Rishabhja101\` inside of this folder, find and open `fantastic-finale-Rishabhja101.sln` in Visual Studio 2017
+- Download the data files from [here](https://anonfile.com/39DdTbE4na/data_zip)
+- Unzip the folder and copy the files inside the folder into `fantastic-finale-Rishabhja101\bin\data`
+- Navigate to `fantastic-finale-Rishabhja101\` inside of this folder, find and open `fantastic-finale-Rishabhja101.sln` in Visual Studio 2017
 - Build and run the solution to play the game
 
 ## Controls
