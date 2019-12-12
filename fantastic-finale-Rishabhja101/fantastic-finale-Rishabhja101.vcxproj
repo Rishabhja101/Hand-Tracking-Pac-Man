@@ -194,6 +194,7 @@
     <ClCompile Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\src\ofxCvImage.cpp" />
     <ClCompile Include="..\..\..\..\Desktop\of_v0.10.1_vs2017_release (1)\of_v0.10.1_vs2017_release\addons\ofxOpenCv\src\ofxCvShortImage.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="Test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ghost.h" />

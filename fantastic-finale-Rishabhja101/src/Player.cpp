@@ -22,52 +22,51 @@ void Player::Draw() {
 
     if (last_direction == Direction::down) {
 		// if the player is facing down, draw the mouth pointed down
-        ofDrawTriangle(position_x, position_y,
-                       position_x + radius * sin(mouth_angle),
-                       position_y + radius * cos(mouth_angle),
-                       position_x - radius * sin(mouth_angle),
-                       position_y + radius * cos(mouth_angle));
+        ofDrawTriangle(position_x, position_y, position_x + radius * sin(mouth_angle),
+                position_y + radius * cos(mouth_angle),
+                position_x - radius * sin(mouth_angle),
+                position_y + radius * cos(mouth_angle));
         ofDrawTriangle(position_x, position_y + 2 * radius * cos(mouth_angle),
-                       position_x + radius * sin(mouth_angle),
-                       position_y + radius * cos(mouth_angle),
-                       position_x - radius * sin(mouth_angle),
-                       position_y + radius * cos(mouth_angle));
+                position_x + radius * sin(mouth_angle),
+                position_y + radius * cos(mouth_angle),
+                position_x - radius * sin(mouth_angle),
+                position_y + radius * cos(mouth_angle));
     } else if (last_direction == Direction::up) {
         // if the player is facing up, draw the mouth pointed up
         ofDrawTriangle(position_x, position_y,
-                       position_x + radius * sin(mouth_angle),
-                       position_y - radius * cos(mouth_angle),
-                       position_x - radius * sin(mouth_angle),
-                       position_y - radius * cos(mouth_angle));
+                position_x + radius * sin(mouth_angle),
+                position_y - radius * cos(mouth_angle),
+                position_x - radius * sin(mouth_angle),
+                position_y - radius * cos(mouth_angle));
         ofDrawTriangle(position_x, position_y - 2 * radius * cos(mouth_angle),
-                       position_x + radius * sin(mouth_angle),
-                       position_y - radius * cos(mouth_angle),
-                       position_x - radius * sin(mouth_angle),
-                       position_y - radius * cos(mouth_angle));
+                position_x + radius * sin(mouth_angle),
+                position_y - radius * cos(mouth_angle),
+                position_x - radius * sin(mouth_angle),
+                position_y - radius * cos(mouth_angle));
     } else if (last_direction == Direction::left) {
         // if the player is facing left, draw the mouth pointed left
         ofDrawTriangle(position_x - 2 * radius * cos(mouth_angle), position_y,
-                       position_x - radius * cos(mouth_angle),
-                       position_y + radius * sin(mouth_angle),
-                       position_x - radius * cos(mouth_angle),
-                       position_y - radius * sin(mouth_angle));
+                position_x - radius * cos(mouth_angle),
+                position_y + radius * sin(mouth_angle),
+                position_x - radius * cos(mouth_angle),
+                position_y - radius * sin(mouth_angle));
         ofDrawTriangle(position_x, position_y,
-                       position_x - radius * cos(mouth_angle),
-                       position_y + radius * sin(mouth_angle),
-                       position_x - radius * cos(mouth_angle),
-                       position_y - radius * sin(mouth_angle));
+                position_x - radius * cos(mouth_angle),
+                position_y + radius * sin(mouth_angle),
+                position_x - radius * cos(mouth_angle),
+                position_y - radius * sin(mouth_angle));
     } else if (last_direction == Direction::right) {
         // if the player is facing right, draw the mouth pointed right
         ofDrawTriangle(position_x + 2 * radius * cos(mouth_angle), position_y,
-                       position_x + radius * cos(mouth_angle),
-                       position_y + radius * sin(mouth_angle),
-                       position_x + radius * cos(mouth_angle),
-                       position_y - radius * sin(mouth_angle));
+                position_x + radius * cos(mouth_angle),
+                position_y + radius * sin(mouth_angle),
+                position_x + radius * cos(mouth_angle),
+                position_y - radius * sin(mouth_angle));
         ofDrawTriangle(position_x, position_y,
-                       position_x + radius * cos(mouth_angle),
-                       position_y + radius * sin(mouth_angle),
-                       position_x + radius * cos(mouth_angle),
-                       position_y - radius * sin(mouth_angle));
+                position_x + radius * cos(mouth_angle),
+                position_y + radius * sin(mouth_angle),
+                position_x + radius * cos(mouth_angle),
+                position_y - radius * sin(mouth_angle));
     }
 }
 
@@ -211,20 +210,21 @@ void Player::Teleport(Map map) {
     if (map.GetAtPosition(x_on_map, y_on_map) == map.kTeleport) {
 		// iterate through each poition on the player's row
         for (int i = 0; i < map.GetWidth(); i++) {
-			// if the position is a teleport that the player is not currently on, move the player there
+			// if the position is a teleport that the player is not on, move the player there
             if (map.GetAtPosition(i, y_on_map) == map.kTeleport && i != x_on_map) {
                 int direction = 1;
                 if (i > map.GetWidth() / 2) {
                     direction = -1;
                 }
-                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 + direction * map.kScale / 2;
+                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 + 
+					direction * map.kScale / 2;
                 return;
             }
         }
     }
 }
 
-// if the player had a powerup, set the powerup to false and return true, otherwise just return false
+// if the player had a powerup, set powerup to false and return true, otherwise just return false
 bool Player::HasPowerup() {
     bool temp = powerup;
     powerup = false;

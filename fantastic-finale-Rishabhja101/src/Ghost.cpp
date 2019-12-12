@@ -31,8 +31,9 @@ void Ghost::Draw(State game_state, bool blink) {
 // Calculate possible directions and the next direction for the ghost and update its position
 void Ghost::Update(Map map, State game_state) {
 	// if the respawn delay has elapsed since the ghost respawned, set escape to true
-	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - respawn_delay) {
-            escape = true;
+	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - 
+			respawn_delay) {
+        escape = true;
 	}
 
 	// if the game state is starting or death, do nothing
@@ -129,12 +130,11 @@ void Ghost::CalculateNextDirection(Map map) {
 		// while the currently calculated direction is not a direction the ghost can omve in, 
 		// randomly pick a new direction
         int dir = ofRandom(0, 4);
-		while (
-            !possible_directions[dir] || (dir == current_direction) ||
-            (current_direction == Direction::right && dir == Direction::left) ||
-            (current_direction == Direction::left && dir == Direction::right) ||
-            (current_direction == Direction::up && dir == Direction::down) ||
-            (current_direction == Direction::down && dir == Direction::up)) {
+		while (!possible_directions[dir] || (dir == current_direction) ||
+				(current_direction == Direction::right && dir == Direction::left) ||
+				(current_direction == Direction::left && dir == Direction::right) ||
+				(current_direction == Direction::up && dir == Direction::down) ||
+				(current_direction == Direction::down && dir == Direction::up)) {
             dir = ofRandom(0, 4);
         }
         current_direction = static_cast<Direction>(dir);
@@ -161,15 +161,14 @@ void Ghost::Teleport(Map map) {
     if (map.GetAtPosition(x_on_map, y_on_map) == map.kTeleport) {
         // iterate through each poition on the ghost's row
         for (int i = 0; i < map.GetWidth(); i++) {
-			// if the position is a teleport that the ghost is not currently on, move the ghost there
-            if (map.GetAtPosition(i, y_on_map) == map.kTeleport &&
-                i != x_on_map) {
+			// if the position is a teleport that the ghost is not on, move the ghost there
+            if (map.GetAtPosition(i, y_on_map) == map.kTeleport && i != x_on_map) {
                 int direction = 1;
                 if (i > map.GetWidth() / 2) {
                     direction = -1;
                 }
-                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 +
-                             direction * map.kScale / 2;
+                position_x = map.kOffsetX + i * map.kScale + map.kScale / 2 + 
+					direction * map.kScale / 2;
                 return;
             }
         }

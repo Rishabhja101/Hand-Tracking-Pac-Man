@@ -24,11 +24,13 @@ void Map::Draw(bool blink) {
             } else if (map[i][n] == kPowerup && !blink) {
 				// if the tile has a powerup, display the powerup
                 ofSetColor(255, 255, 255);
-                ofDrawCircle(n * kScale + kOffsetX + kScale / 2, i * kScale + kOffsetY + kScale / 2, kPowerupRadius);
+                ofDrawCircle(n * kScale + kOffsetX + kScale / 2, i * kScale + kOffsetY + 
+					kScale / 2, kPowerupRadius);
             } else if (map[i][n] == kCoin) {
 				// if the tile has a coin, display the coin
                 ofSetColor(255, 255, 255);
-                ofDrawCircle(n * kScale + kOffsetX + kScale / 2, i * kScale + kOffsetY + kScale / 2, kCoinRadius);
+                ofDrawCircle(n * kScale + kOffsetX + kScale / 2, i * kScale + kOffsetY + 
+					kScale / 2, kCoinRadius);
             }
         }
     }

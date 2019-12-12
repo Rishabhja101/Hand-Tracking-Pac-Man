@@ -15,7 +15,7 @@ class ofApp : public ofBaseApp {
    private:
     const int kBlinkSpeed = 1;
     const int kScaredTime = 10;
-    const int kUnscaringTime = 10;
+    const int kUnscaringTime = 5;
     const int kStartingTime = 5;
     const int kDyingTime = 2;
     const string kGameMusicPath = "pacman_beginning.wav";

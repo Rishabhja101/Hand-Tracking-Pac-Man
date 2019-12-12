@@ -41,6 +41,9 @@
     <ClCompile Include="src\Ghost.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Test.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

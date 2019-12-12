@@ -8,43 +8,50 @@ Ghost::Ghost() {
 }
 
 void Ghost::Draw(State game_state, bool blink) {
-    // if the game mode is regular, death, start, starting, or ended, deisplay the ghost 
-	// as its given regular color
-	if (game_state == State::regular || game_state == State::death ||
+    // if the game mode is regular, death, start, starting, or ended, deisplay
+    // the ghost as its given regular color
+    if (game_state == State::regular || game_state == State::death ||
         game_state == State::starting || game_state == State::start ||
         game_state == State::ended) {
         ofSetColor(color_r, color_g, color_b);
-    } 
-	// if the game mode is scared or unscaring and blink is true, display the ghost as blue
-	else if (game_state == State::scared || (game_state == State::unscaring && blink)) {
+    }
+    // if the game mode is scared or unscaring and blink is true, display the
+    // ghost as blue
+    else if (game_state == State::scared ||
+             (game_state == State::unscaring && blink)) {
         ofSetColor(0, 0, 255);
-    } 
-	// otherwise, if unscaring is true then display the ghost as white
-	else if (game_state == State::unscaring) {
+    }
+    // otherwise, if unscaring is true then display the ghost as white
+    else if (game_state == State::unscaring) {
         ofSetColor(255, 255, 255);
     }
 
-	// draw the ghost as a circle
+    // draw the ghost as a circle
     ofDrawCircle(position_x, position_y, kRadius);
 }
 
-// Calculate possible directions and the next direction for the ghost and update its position
+// Calculate possible directions and the next direction for the ghost and update
+// its position
 void Ghost::Update(Map map, State game_state) {
-	// if the respawn delay has elapsed since the ghost respawned, set escape to true
-	if (respawn_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - respawn_delay) {
-            escape = true;
-	}
+    // if the respawn delay has elapsed since the ghost respawned, set escape to
+    // true
+    if (respawn_time ==
+        chrono::system_clock::to_time_t(chrono::system_clock::now()) -
+            respawn_delay) {
+        escape = true;
+    }
 
-	// if the game state is starting or death, do nothing
+    // if the game state is starting or death, do nothing
     if (game_state == State::starting || game_state == State::death) {
         return;
-	}
+    }
 
-	// Check for the possible directions the ghost can move and calculate its next direction
+    // Check for the possible directions the ghost can move and calculate its
+    // next direction
     Collisions(map);
     CalculateNextDirection(map);
 
-	// Move the ghost in the direction that it is facing
+    // Move the ghost in the direction that it is facing
     if (current_direction == Direction::up) {
         position_y -= kSpeed;
     } else if (current_direction == Direction::down) {
@@ -55,7 +62,7 @@ void Ghost::Update(Map map, State game_state) {
         position_x += kSpeed;
     }
 
-	// If the ghost is at a teleport, teleport it
+    // If the ghost is at a teleport, teleport it
     Teleport(map);
 }
 
@@ -121,15 +128,18 @@ void Ghost::Collisions(Map map) {
 // Determines which direction the ghost should move in
 void Ghost::CalculateNextDirection(Map map) {
     if (current_direction == Direction::none ||
-        ((current_direction == Direction::right || current_direction == Direction::left) &&
-         (possible_directions[Direction::up] || possible_directions[Direction::down])) ||
-        ((current_direction == Direction::up || current_direction == Direction::down) &&
-         (possible_directions[Direction::right] || possible_directions[Direction::left]))) {
-        
-		// while the currently calculated direction is not a direction the ghost can omve in, 
-		// randomly pick a new direction
+        ((current_direction == Direction::right ||
+          current_direction == Direction::left) &&
+         (possible_directions[Direction::up] ||
+          possible_directions[Direction::down])) ||
+        ((current_direction == Direction::up ||
+          current_direction == Direction::down) &&
+         (possible_directions[Direction::right] ||
+          possible_directions[Direction::left]))) {
+        // while the currently calculated direction is not a direction the ghost
+        // can omve in, randomly pick a new direction
         int dir = ofRandom(0, 4);
-		while (
+        while (
             !possible_directions[dir] || (dir == current_direction) ||
             (current_direction == Direction::right && dir == Direction::left) ||
             (current_direction == Direction::left && dir == Direction::right) ||
@@ -140,28 +150,30 @@ void Ghost::CalculateNextDirection(Map map) {
         current_direction = static_cast<Direction>(dir);
     }
 
-	// if the ghost is set to escape, allow it to escape
+    // if the ghost is set to escape, allow it to escape
     if (escape) {
-		// if the ghost is at its spawn location, set its direction to up
+        // if the ghost is at its spawn location, set its direction to up
         if (position_x == kSpawnPositionX &&
             position_y > kSpawnPositionY - map.kScale * 2) {
             current_direction = Direction::up;
-        } 
-		// Onnce the ghost leaves its cage, set escape to false
-		else if (position_y <= kSpawnPositionY - map.kScale * 2) {
+        }
+        // Onnce the ghost leaves its cage, set escape to false
+        else if (position_y <= kSpawnPositionY - map.kScale * 2) {
             escape = false;
         }
     }
 }
 
-// If the ghost is on a teleport spot, move the ghost to the other teleport on that same row
+// If the ghost is on a teleport spot, move the ghost to the other teleport on
+// that same row
 void Ghost::Teleport(Map map) {
     int x_on_map = (position_x - map.kOffsetX) / map.kScale;
     int y_on_map = (position_y - map.kOffsetY) / map.kScale;
     if (map.GetAtPosition(x_on_map, y_on_map) == map.kTeleport) {
         // iterate through each poition on the ghost's row
         for (int i = 0; i < map.GetWidth(); i++) {
-			// if the position is a teleport that the ghost is not currently on, move the ghost there
+            // if the position is a teleport that the ghost is not on, move the
+            // ghost there
             if (map.GetAtPosition(i, y_on_map) == map.kTeleport &&
                 i != x_on_map) {
                 int direction = 1;
@@ -176,10 +188,11 @@ void Ghost::Teleport(Map map) {
     }
 }
 
-// Reset the ghost's position to its spawn location and play its death sound effect
-void Ghost::Kill() { 
-	death_music.play();
-	ResetPosition(); 
+// Reset the ghost's position to its spawn location and play its death sound
+// effect
+void Ghost::Kill() {
+    death_music.play();
+    ResetPosition();
 }
 
 // Reset the ghost's position to its spawn location and reset the respawn time
@@ -187,8 +200,8 @@ void Ghost::ResetPosition() {
     position_x = kSpawnPositionX;
     position_y = kSpawnPositionY;
 
-	respawn_delay = kRespawnTime;
-	respawn_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    respawn_delay = kRespawnTime;
+    respawn_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 }
 
 // Returns true if the ghost collided with the player otherwise returns false
@@ -211,13 +224,11 @@ bool Ghost::PlayerCollision(int position_x, int position_y, State game_state,
 }
 
 // Set the regular color of the ghost to the given rgb values
-void Ghost::SetColor(int r, int g, int b) { 
-	color_r = r;
+void Ghost::SetColor(int r, int g, int b) {
+    color_r = r;
     color_g = g;
     color_b = b;
 }
 
-// Set the respawn time of the ghost to the given 
-void Ghost::SetRespawnTime(int delay) {
-	respawn_delay = delay;
-}
+// Set the respawn time of the ghost to the given
+void Ghost::SetRespawnTime(int delay) { respawn_delay = delay; }

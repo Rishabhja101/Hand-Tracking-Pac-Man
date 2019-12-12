@@ -48,14 +48,14 @@ void ofApp::update() {
 	// update the camera input
     input.Update();
 
-	cout << chrono::system_clock::to_time_t(chrono::system_clock::now()) - sound_delay_time << endl;
-
 	// after the starting time has passed, set the game state to regular
-    if (game_state == State::starting && sound_delay_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kStartingTime) {
+    if (game_state == State::starting && sound_delay_time == 
+			chrono::system_clock::to_time_t(chrono::system_clock::now()) - kStartingTime) {
         game_state = State::regular;
     } 
 	// after the dying time has passed, set the game state to starting
-	else if (game_state == State::death && sound_delay_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kDyingTime) {
+	else if (game_state == State::death && sound_delay_time == 
+			chrono::system_clock::to_time_t(chrono::system_clock::now()) - kDyingTime) {
         game_state = State::starting;
         game_music.play();
 
@@ -69,7 +69,8 @@ void ofApp::update() {
         sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
     } 
 	// if the game state is start, ended, or ended, don't update anyting
-	else if (game_state == State::start || game_state == State::ended || game_state == State::death) {
+	else if (game_state == State::start || game_state == State::ended || 
+		game_state == State::death) {
         return;
 	}
 
@@ -79,18 +80,21 @@ void ofApp::update() {
     }
 
     // flip the bool for blinking if the blink time has elapsed
-    if (blink_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kBlinkSpeed) {
+    if (blink_timer <= chrono::system_clock::to_time_t(chrono::system_clock::now()) - 
+			kBlinkSpeed) {
         blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
         blink = !blink;
     }
 
     // check if it is time to unscare
     if (game_state == State::scared &&
-        scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kScaredTime) {
+        scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - 
+			kScaredTime) {
         game_state = State::unscaring;
         scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     } 
-	else if (game_state == State::unscaring && scared_timer == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kUnscaringTime) {
+	else if (game_state == State::unscaring && scared_timer == 
+		chrono::system_clock::to_time_t(chrono::system_clock::now()) - kUnscaringTime) {
         game_state = State::regular;
     }
 
@@ -114,7 +118,8 @@ void ofApp::update() {
 
 	// for each ghost, check if the ghost collides with the player when the ghost is not scared
     for (int i = 0; i < ghosts.size(); i++) {
-        if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
+        if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), 
+				game_state, map)) {
             if (game_state != State::scared && game_state != State::unscaring) {
 				// if the player has no lives left, set the game state to ended
 				if (player.IsDead()) {
@@ -179,9 +184,11 @@ void ofApp::draw() {
     main_font.drawString("High Score", map.kOffsetX + map.kScale * 3.5, map.kOffsetY);
     main_font.drawString("Score", map.kOffsetX + map.kScale * 9.5, map.kOffsetY);
     main_font.drawString("Lives", map.kOffsetX + map.kScale * 15, map.kOffsetY);
-    main_font.drawString(score_high, map.kOffsetX + map.kScale * 4.5, map.kOffsetY + map.kScale * 0.5);
+    main_font.drawString(score_high, map.kOffsetX + map.kScale * 4.5, map.kOffsetY + 
+		map.kScale * 0.5);
     main_font.drawString(score, map.kOffsetX + map.kScale * 9.5, map.kOffsetY + map.kScale * 0.5);
-    main_font.drawString(to_string(player.GetLives()), map.kOffsetX + map.kScale * 15.75, map.kOffsetY + map.kScale * 0.5);
+    main_font.drawString(to_string(player.GetLives()), map.kOffsetX + map.kScale * 15.75, 
+		map.kOffsetY + map.kScale * 0.5);
 
 	// if the game state is start, display the start screen
     if (game_state == State::start) {

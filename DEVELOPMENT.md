@@ -63,3 +63,5 @@
   - Score now increases when player gets powerups and eats ghosts
   - Map data now leads from relative path rather than absolute path
   - Removed some unnecessary files
+  - Added Tests
+  - Fixed formatting of code to ensure no lines are longer than 100 characters

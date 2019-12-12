@@ -24,7 +24,8 @@ void CameraInput::Draw() {
 
     // draw red circles for blob if one is found
     if (contours.nBlobs > 0) {
-        ofCircle(contours.blobs[0].centroid.x - kRadius / 2 + kOffset_x, contours.blobs[0].centroid.y - kRadius / 2 + kOffset_y, kRadius);
+        ofCircle(contours.blobs[0].centroid.x - kRadius / 2 + kOffset_x, 
+			contours.blobs[0].centroid.y - kRadius / 2 + kOffset_y, kRadius);
     }
 }
 
