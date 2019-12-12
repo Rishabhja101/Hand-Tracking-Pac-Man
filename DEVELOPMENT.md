@@ -68,3 +68,4 @@
   - Added background music for scared state
   - Added background music for regular game state
   - Fixed bug preventing ghosts from escaping cage one at a time when game starts
+  - Background music stops playing when map is reloaded

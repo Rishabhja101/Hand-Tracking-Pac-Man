@@ -246,6 +246,10 @@ void ofApp::NewGame() {
     blink_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
     sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 	
+	// stop all other music
+	scared_music.stop();
+    background_music.stop();
+
 	// play the starting music
     game_music.play();
     
