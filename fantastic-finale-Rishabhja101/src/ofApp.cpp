@@ -48,10 +48,7 @@ void ofApp::update() {
 	// update the camera input
     input.Update();
 
-	// if the game state is start or ended, don't update anyting
-    if (game_state == State::start || game_state == State::ended) {
-        return;
-    }
+	cout << chrono::system_clock::to_time_t(chrono::system_clock::now()) - sound_delay_time << endl;
 
 	// after the starting time has passed, set the game state to regular
     if (game_state == State::starting && sound_delay_time == chrono::system_clock::to_time_t(chrono::system_clock::now()) - kStartingTime) {
@@ -70,7 +67,11 @@ void ofApp::update() {
 
         player.Kill();
         sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-    }
+    } 
+	// if the game state is start, ended, or ended, don't update anyting
+	else if (game_state == State::start || game_state == State::ended || game_state == State::death) {
+        return;
+	}
 
     if (kCameraInput) {
 		// get the new direction for the player

@@ -61,3 +61,5 @@
   - Window size displays entire map when program starts
   - Wrote README
   - Score now increases when player gets powerups and eats ghosts
+  - Map data now leads from relative path rather than absolute path
+  - Removed some unnecessary files

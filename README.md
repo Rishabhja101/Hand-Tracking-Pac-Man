@@ -2,11 +2,11 @@
 
 - This project is an interpretation of Pac-Man where the input to control the direction of the player comes from tracking the user's hand using color tracking to determine if the player should move up/down/left/right.
 
-![](images/image_1.png)
-![](images/image_2.png)
-![](images/image_3.png)
-![](images/image_4.png)
-![](images/image_5.png)
+![](images/image_1.png =250x)
+![](images/image_2.png =250x)
+![](images/image_3.png =250x)
+![](images/image_4.png =250x)
+![](images/image_5.png =250x)
 
 ## Dependencies
 

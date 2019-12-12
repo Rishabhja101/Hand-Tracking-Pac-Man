@@ -29,8 +29,7 @@ class Map {
     static vector<string> map;
     const int kPowerupRadius = 10;
     const int kCoinRadius = 5;
-    const string kFilePath ="C:\\Users\\risha\\OneDrive\\Documents\\GitHub\\fantastic-finale-"
-        "Rishabhja101\\fantastic-finale-Rishabhja101\\bin\\data\\map_data.txt";
+    const string kFilePath ="data\\map_data.txt";
 
     int width;
     int height;
