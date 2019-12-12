@@ -4,7 +4,6 @@ Ghost::Ghost() {
     ResetPosition();
     current_direction = Direction::none;
     death_music.load(kMusicPath);
-    escape = true;
 }
 
 void Ghost::Draw(State game_state, bool blink) {
@@ -33,6 +32,7 @@ void Ghost::Draw(State game_state, bool blink) {
 // Calculate possible directions and the next direction for the ghost and update
 // its position
 void Ghost::Update(Map map, State game_state) {
+
     // if the respawn delay has elapsed since the ghost respawned, set escape to
     // true
     if (respawn_time ==
@@ -202,6 +202,7 @@ void Ghost::ResetPosition() {
 
     respawn_delay = kRespawnTime;
     respawn_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+    escape = false;
 }
 
 // Returns true if the ghost collided with the player otherwise returns false

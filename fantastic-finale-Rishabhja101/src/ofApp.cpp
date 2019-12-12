@@ -13,7 +13,6 @@ void ofApp::setup() {
     for (int i = 0; i < 4; i++) {
         Ghost g;
         ghosts.push_back(g);
-        ghosts[i].SetRespawnTime(kStartingTime + i + 1);
     }
 
     ghosts[0].SetColor(255, 0, 0);      // red
@@ -260,5 +259,6 @@ void ofApp::NewGame() {
 	// reset the ghosts' locations
     for (int i = 0; i < ghosts.size(); i++) {
         ghosts[i].ResetPosition();
+        ghosts[i].SetRespawnTime(kStartingTime + i * 2 + 1);
     }
 }

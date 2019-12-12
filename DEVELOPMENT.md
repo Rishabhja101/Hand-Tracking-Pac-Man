@@ -67,3 +67,4 @@
   - Fixed formatting of code to ensure no lines are longer than 100 characters
   - Added background music for scared state
   - Added background music for regular game state
+  - Fixed bug preventing ghosts from escaping cage one at a time when game starts
