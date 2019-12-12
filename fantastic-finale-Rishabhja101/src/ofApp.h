@@ -21,6 +21,8 @@ class ofApp : public ofBaseApp {
     const string kGameMusicPath = "pacman_beginning.wav";
     const string kDeathMusicPath = "pacman_death.wav";
     const string kEatMusicPath = "pacman_chomp.wav";
+    const string kScaredMusicPath = "Pacman_Siren.wav";
+    const string kBackgroundMusicPath = "Pacman_Waka_Waka.wav";
     const int kScoreLength = 5;
     const string kFontPath = "Gravedigger-8BOZ.ttf";
     const string kTitleFontPath = "FridayNightLights-l5pe.ttf";
@@ -38,6 +40,8 @@ class ofApp : public ofBaseApp {
     State game_state;
     ofSoundPlayer game_music;
     ofSoundPlayer death_music;
+    ofSoundPlayer scared_music;
+    ofSoundPlayer background_music;
     vector<Ghost> ghosts;
     ofTrueTypeFont main_font;
     ofTrueTypeFont title_font;

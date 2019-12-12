@@ -26,7 +26,12 @@ void ofApp::setup() {
     eat_music.load(kEatMusicPath);
     game_music.load(kGameMusicPath);
     death_music.load(kDeathMusicPath);
+    scared_music.load(kScaredMusicPath);
+    background_music.load(kBackgroundMusicPath);
     player.LoadMusic(eat_music);
+    scared_music.setLoop(true);
+    background_music.setLoop(true);
+    background_music.setVolume(0.5);
 
 	// load the fonts for the game
     main_font.load(kFontPath, 20);
@@ -52,6 +57,7 @@ void ofApp::update() {
     if (game_state == State::starting && sound_delay_time == 
 			chrono::system_clock::to_time_t(chrono::system_clock::now()) - kStartingTime) {
         game_state = State::regular;
+        background_music.play();
     } 
 	// after the dying time has passed, set the game state to starting
 	else if (game_state == State::death && sound_delay_time == 
@@ -67,7 +73,7 @@ void ofApp::update() {
 
         player.Kill();
         sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-    } 
+    }
 	// if the game state is start, ended, or ended, don't update anyting
 	else if (game_state == State::start || game_state == State::ended || 
 		game_state == State::death) {
@@ -96,6 +102,8 @@ void ofApp::update() {
 	else if (game_state == State::unscaring && scared_timer == 
 		chrono::system_clock::to_time_t(chrono::system_clock::now()) - kUnscaringTime) {
         game_state = State::regular;
+        scared_music.stop();
+        background_music.play();
     }
 
 	// update player and each ghost
@@ -108,6 +116,8 @@ void ofApp::update() {
     if (player.HasPowerup()) {
         game_state = State::scared;
         scared_timer = chrono::system_clock::to_time_t(chrono::system_clock::now());
+        background_music.stop();
+		scared_music.play();
     }
 
 	// if the player's score is higher than the old high score, set it as the
@@ -134,7 +144,7 @@ void ofApp::update() {
 					sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 					game_state = State::death;
 				}
-
+                background_music.stop();
 				death_music.play();
             } 
 			else {

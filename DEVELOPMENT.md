@@ -65,3 +65,5 @@
   - Removed some unnecessary files
   - Added Tests
   - Fixed formatting of code to ensure no lines are longer than 100 characters
+  - Added background music for scared state
+  - Added background music for regular game state

@@ -9,7 +9,7 @@
 
 ## Dependencies
 
-- [MSVC 2015+](https://visualstudio.microsoft.com/)
+- [Visual Studio 2017](https://visualstudio.microsoft.com/)
 - [ofxOpenCV](https://openframeworks.cc/documentation/ofxOpenCv/)
 - [openframeworks](https://openframeworks.cc/download/)
 
