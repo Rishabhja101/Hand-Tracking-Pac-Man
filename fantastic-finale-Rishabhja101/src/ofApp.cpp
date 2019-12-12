@@ -114,21 +114,26 @@ void ofApp::update() {
 	// for each ghost, check if the ghost collides with the player when the ghost is not scared
     for (int i = 0; i < ghosts.size(); i++) {
         if (ghosts[i].PlayerCollision(player.GetPositionX(), player.GetPositionY(), game_state, map)) {
-            // if the player has no lives left, set the game state to ended
-			if (player.IsDead()) {
-                game_state = State::ended;
+            if (game_state != State::scared && game_state != State::unscaring) {
+				// if the player has no lives left, set the game state to ended
+				if (player.IsDead()) {
+					game_state = State::ended;
 
-				// save the high score
-                ofstream output(kHighScorePath);
-                output << high_score << endl;
-                output.close();
-            } else {
-				// the player has lives left so respawn the player and ghosts
-                sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
-                game_state = State::death;
-            }
+					// save the high score
+					ofstream output(kHighScorePath);
+					output << high_score << endl;
+					output.close();
+				} else {
+					// the player has lives left so respawn the player and ghosts
+					sound_delay_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
+					game_state = State::death;
+				}
 
-            death_music.play();
+				death_music.play();
+            } 
+			else {
+                player.EatGhost();
+			}
         }
     }
 

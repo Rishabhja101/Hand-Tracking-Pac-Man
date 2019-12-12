@@ -191,8 +191,8 @@ void Ghost::ResetPosition() {
 	respawn_time = chrono::system_clock::to_time_t(chrono::system_clock::now());
 }
 
-// Returns true if the player died, if the player ate the ghost, kills the ghost
-// and returns false, otherwise just returns false
+// Returns true if the ghost collided with the player otherwise returns false
+// if the player ate the ghost, kills the ghost, sending it to its spawn position
 bool Ghost::PlayerCollision(int position_x, int position_y, State game_state, Map map) {
     if ((this->position_x - map.kOffsetX) / map.kScale ==
         (position_x - map.kOffsetX) / map.kScale &&
@@ -201,12 +201,10 @@ bool Ghost::PlayerCollision(int position_x, int position_y, State game_state, Ma
         
 		// if the game state is regular, return true that the player died, 
 		// otherwise kill the ghost and return false 
-		if (game_state == State::regular) {
-            return true;
-        } else if (game_state == State::unscaring || game_state == State::scared) {
+		if (game_state == State::unscaring || game_state == State::scared) {
             Kill();
-            return false;
         }
+        return true;
     }
     return false;
 }

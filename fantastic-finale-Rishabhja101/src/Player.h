@@ -20,6 +20,7 @@ class Player {
     int GetLives();
     int GetScore();
     void Reset();
+    void EatGhost();
 
    private:
     const int kSpeed = 6;
@@ -27,6 +28,8 @@ class Player {
     const int kSpawnPositionX = 680;
     const int kSpawnPositionY = 1040;
     const int kCoinValue = 10;
+    const int kPowerupValue = 20;
+    const int kGhostValue = 50;
     const int kStartingLives = 3;
     const double kMaxMouthDegree = 0.8;
     const double kMouthSpeed = 0.1;

@@ -186,6 +186,7 @@ void Player::Collisions(Map map) {
 
     // get powerup
     if (map.GetPowerup(x_on_map, y_on_map)) {
+        score += kPowerupValue;
         powerup = true;
     }
 }
@@ -285,4 +286,9 @@ int Player::GetScore() {
 void Player::Reset() { 
 	lives = kStartingLives;
     score = 0;
+}
+
+// Called when player eats a ghost, increases score accordingly
+void Player::EatGhost() { 
+	score += kGhostValue; 
 }
